@@ -1,9 +1,9 @@
-import { categories, items } from "../test/sampleData.js";
+import { categories, instruments } from "../test/sampleData.js";
 
 const renderIndex = (req, res, next) => {
   res.render("index", {
     categories,
-    items,
+    instruments,
     title: "Sinventory",
   });
 };

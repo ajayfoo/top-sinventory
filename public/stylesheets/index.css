@@ -1,10 +1,10 @@
-.category-items {
+.category-instruments {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   place-items: center;
 }
 
-.item > img {
+.instrument-img {
   aspect-ratio: 6/7;
   object-fit: cover;
   object-position: center;

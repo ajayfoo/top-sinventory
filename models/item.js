@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const ItemSchema = new Schema({
+const InstrumentSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
@@ -12,4 +12,4 @@ const ItemSchema = new Schema({
   imgUrl: { type: String, required: true },
 });
 
-export default mongoose.model("Item", ItemSchema);
+export default mongoose.model("Instrument", InstrumentSchema);

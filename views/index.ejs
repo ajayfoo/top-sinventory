@@ -6,14 +6,20 @@
   <% for(const category of categories){%>
   <section class="category">
     <h3><%=category.name%></h3>
-    <div class="category-items">
-      <%for(const item of items){%>
-      <article class="item">
-        <img src="<%=item.imgUrl%>" alt="item image" />
-        <div class="item info">
-          <p><%=item.name%></p>
-          <p><%=item.price%></p>
-          <p><%=item.count%> in stock</p>
+    <div class="category-instruments">
+      <%for(const instrument of instruments){%>
+      <article class="instrument">
+        <a href="<%= '/instrument/'+ instrument._id %>">
+          <img
+            class="instrument"
+            src="<%=instrument.imgUrl%>"
+            alt="instrument image"
+          />
+        </a>
+        <div class="instrument info">
+          <p><%=instrument.name%></p>
+          <p><%=instrument.price%></p>
+          <p><%=instrument.count%> in stock</p>
         </div>
       </article>
       <%}%>
