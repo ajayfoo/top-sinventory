@@ -2,28 +2,40 @@
 <link rel="stylesheet" href="/stylesheets/index.css" />
 <main>
   <h1><%=title%></h1>
-  <h2>Grouped By Categories</h2>
-  <% for(const category of categories){%>
-  <section class="category">
-    <h3><%=category.name%></h3>
-    <div class="category-instruments">
-      <%for(const instrument of instruments){%>
-      <article class="instrument">
-        <a href="<%= '/instrument/'+ instrument._id %>">
-          <img
-            class="instrument-img"
-            src="<%=instrument.imgUrl%>"
-            alt="instrument image"
-          />
-        </a>
-        <div class="instrument info">
-          <p><%=instrument.name%></p>
-          <p><%=instrument.price%></p>
-          <p><%=instrument.count%> in stock</p>
-        </div>
-      </article>
-      <%}%>
-    </div>
-  </section>
-  <%}%>
+  <div class="select-category">
+    <form method="post" action="/">
+      <fieldset>
+        <legend>Select Category</legend>
+        <% for(const category of categories){ const catId='category_' +
+        category.name %>
+        <input
+          type="checkbox"
+          value="<%=category._id%>"
+          name="selected_categories"
+          id="<%=catId%>"
+        />
+        <label for="<%=catId%>"> <%=category.name%> </label>
+        <%}%>
+      </fieldset>
+      <button>Get</button>
+    </form>
+  </div>
+  <div class="category-instruments">
+    <%for(const instrument of instruments){%>
+    <article class="instrument">
+      <a href="<%= '/instrument/'+ instrument._id %>">
+        <img
+          class="instrument-img"
+          src="<%=instrument.imgUrl%>"
+          alt="instrument image"
+        />
+      </a>
+      <div class="instrument info">
+        <p><%=instrument.name%></p>
+        <p><%=instrument.price%></p>
+        <p><%=instrument.count%> in stock</p>
+      </div>
+    </article>
+    <%}%>
+  </div>
 </main>

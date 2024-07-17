@@ -28,7 +28,7 @@ const instruments = [
     description: "A small O-cut classical, nylon stringed guitar.",
     imgUrl: "/images/guitar.jpg",
     url: "",
-    category: { $oid: "6697b2780adf569d4494d2bb" },
+    category: "6697b2780adf569d4494d2bb",
   },
   {
     _id: "6697b3e50adf569d4494d2be",
@@ -36,7 +36,7 @@ const instruments = [
     count: 27,
     price: 21000,
     description: "A flute of type 1",
-    category: { $oid: "6697b36c0adf569d4494d2bd" },
+    category: "6697b36c0adf569d4494d2bd",
     imgUrl: "/images/flute.jpg",
     url: "",
   },
@@ -48,7 +48,7 @@ const instruments = [
     price: 15500,
     url: "",
     imgUrl: "/images/tabla.jpg",
-    category: { $oid: "6697b3180adf569d4494d2bc" },
+    category: "6697b3180adf569d4494d2bc",
   },
 ];
 
