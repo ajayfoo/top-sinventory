@@ -1,10 +1,23 @@
 <%- include('layout',{title}); -%>
+<link rel="stylesheet" href="/stylesheets/index.css" />
 <main>
   <h1><%=title%></h1>
-  <h2>Categories</h2>
-  <ul>
-    <% for(const cat of categories){%>
-    <li><%=cat.name%></li>
-    <%}%>
-  </ul>
+  <h2>Grouped By Categories</h2>
+  <% for(const category of categories){%>
+  <section class="category">
+    <h3><%=category.name%></h3>
+    <div class="category-items">
+      <%for(const item of items){%>
+      <article class="item">
+        <img src="<%=item.imgUrl%>" alt="item image" />
+        <div class="item info">
+          <p><%=item.name%></p>
+          <p><%=item.price%></p>
+          <p><%=item.count%> in stock</p>
+        </div>
+      </article>
+      <%}%>
+    </div>
+  </section>
+  <%}%>
 </main>

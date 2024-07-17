@@ -8,4 +8,6 @@ const renderIndex = (req, res, next) => {
   });
 };
 
+const renderSearchResult = (req, res, next) => {};
+
 export { renderIndex };
