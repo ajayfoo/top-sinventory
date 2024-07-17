@@ -1,0 +1,9 @@
+const renderIndex = (req, res, next) => {
+  res.render("index", {
+    categories: [],
+    items: [],
+    title: "Sinventory",
+  });
+};
+
+export default { renderIndex };
