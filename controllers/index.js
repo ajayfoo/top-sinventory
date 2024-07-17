@@ -1,9 +1,11 @@
+import { categories, items } from "../test/sampleData.js";
+
 const renderIndex = (req, res, next) => {
   res.render("index", {
-    categories: [],
-    items: [],
+    categories,
+    items,
     title: "Sinventory",
   });
 };
 
-export default { renderIndex };
+export { renderIndex };

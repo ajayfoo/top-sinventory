@@ -55,7 +55,4 @@ const items = [
   },
 ];
 
-export default {
-  categories,
-  items,
-};
+export { categories, items };
