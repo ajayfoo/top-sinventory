@@ -1,13 +1,13 @@
 import { instruments } from "../test/sampleData.js";
 
 const renderCreateForm = (req, res, next) => {
-  res.render("update_instrument_form", {
+  res.render("create_instrument_form", {
     title: "Create Instrument",
     name: "",
     description: "",
     price: "",
     count: "",
-    _id: null,
+    isCreateForm: true,
   });
 };
 
@@ -26,8 +26,9 @@ const render = (req, res, next) => {
 
 const renderUpdateForm = (req, res, next) => {
   const targetInstrument = instruments.find((i) => i._id === req.params.id);
-  res.render("update_instrument_form", {
+  res.render("create_instrument_form", {
     title: "Update " + targetInstrument.name,
+    isCreateForm: false,
     ...targetInstrument,
   });
 };

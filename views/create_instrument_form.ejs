@@ -1,5 +1,4 @@
-<%- include('layout',{title}) %> <% const isCreateForm=_id===null;
-console.log(isCreateForm); const
+<%- include('layout',{title}) %> <% const
 postUrl='/instrument/'+(isCreateForm?'create':_id+'/update'); const
 _idForForm=isCreateForm?Date.now().toString():_id; %>
 <main>
