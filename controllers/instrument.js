@@ -8,6 +8,7 @@ const renderCreateForm = (req, res, next) => {
     price: "",
     count: "",
     isCreateForm: true,
+    categories,
   });
 };
 
@@ -38,20 +39,24 @@ const render = (req, res, next) => {
 
 const renderUpdateForm = (req, res, next) => {
   const targetInstrument = instruments.find((i) => i._id === req.params.id);
+  const currentCategoryId = targetInstrument.category;
   res.render("create_instrument_form", {
     title: "Update " + targetInstrument.name,
     isCreateForm: false,
+    categories,
+    currentCategoryId,
     ...targetInstrument,
   });
 };
 
 const update = (req, res, next) => {
   const targetInstrument = instruments.find((i) => i._id === req.body._id);
-  const { name, description, price, count } = req.body;
+  const { name, description, price, count, category } = req.body;
   targetInstrument.name = name;
   targetInstrument.description = description;
   targetInstrument.price = price;
   targetInstrument.count = count;
+  targetInstrument.category = category;
   res.redirect("../../");
 };
 

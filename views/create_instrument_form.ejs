@@ -14,6 +14,18 @@ _idForForm=isCreateForm?Date.now().toString():_id; %>
       <textarea name="description" id="description"><%=description%></textarea>
     </p>
     <p class="field">
+      <label for="category">Category: </label>
+      <select name="category" id="category">
+        <%for(const category of categories){ if(!isCreateForm &&
+        category._id===currentCategoryId){ %>
+
+        <option selected value="<%=category._id%>"><%=category.name%></option>
+        <%}else{%>
+        <option value="<%=category._id%>"><%=category.name%></option>
+        <%}%> <%}%>
+      </select>
+    </p>
+    <p class="field">
       <label for="price">Price: </label>
       <input type="number" name="price" min="0" id="price" value="<%=price%>" />
     </p>
