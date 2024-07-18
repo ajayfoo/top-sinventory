@@ -12,7 +12,17 @@ const renderCreateForm = (req, res, next) => {
 };
 
 const create = (req, res, next) => {
-  console.log(req.body);
+  const { _id, name, description, price, count } = req.body;
+  const newInstrument = {
+    _id,
+    name,
+    description,
+    price: parseFloat(price),
+    count: parseInt(count),
+    imgUrl: instruments[0].imgUrl,
+    url: "",
+  };
+  instruments.push(newInstrument);
   res.redirect("../../");
 };
 
