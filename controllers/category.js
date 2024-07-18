@@ -1,4 +1,4 @@
-import { categories } from "../test/sampleData.js";
+import { categories, instruments } from "../test/sampleData.js";
 
 const goHome = (res) => {
   res.redirect("../../");
@@ -46,11 +46,42 @@ const update = (req, res, next) => {
 };
 
 const remove = (req, res, next) => {
-  req.body.selected_categories.forEach((c) => {
-    const targetIndex = categories.findIndex((e) => e._id === c);
-    categories.splice(targetIndex, 1);
+  const instrumentMap = {};
+  const selectedCategories = [];
+
+  if (!Array.isArray(req.body.selected_categories)) {
+    selectedCategories.push(req.body.selected_categories);
+  } else {
+    selectedCategories.push(...req.body.selected_categories);
+  }
+
+  selectedCategories.forEach((c) => {
+    const dependentInstruments = instruments.filter((i) => i.category === c);
+    if (dependentInstruments.length !== 0) {
+      instrumentMap[c] = dependentInstruments;
+    } else {
+      const targetIndex = categories.findIndex((e) => e._id === c);
+      categories.splice(targetIndex, 1);
+    }
   });
-  goHome(res);
+
+  const categoryIdsWithDependentInstruments = Object.keys(instrumentMap);
+  console.log(
+    categories.filter((c) =>
+      categoryIdsWithDependentInstruments.includes(c._id)
+    )
+  );
+  if (categoryIdsWithDependentInstruments.length === 0) {
+    goHome(res);
+  } else {
+    res.render("confirm_delete_category_form", {
+      title: "Confirm Deletion",
+      categories: categories.filter((c) =>
+        categoryIdsWithDependentInstruments.includes(c._id)
+      ),
+      instrumentMap,
+    });
+  }
 };
 
 export { renderCreateForm, create, renderUpdateForm, update, remove };

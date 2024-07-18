@@ -69,4 +69,40 @@ const remove = (req, res, next) => {
   res.redirect("../../");
 };
 
-export { create, renderCreateForm, render, renderUpdateForm, update, remove };
+const removeMultiple = (req, res, next) => {
+  const instrumentIds = [];
+  if (!Array.isArray(req.body.instrumentIds)) {
+    instrumentIds.push(req.body.instrumentIds);
+  } else {
+    instrumentIds.push(...req.body.instrumentIds);
+  }
+  instrumentIds.forEach((id) => {
+    const instrumentIndex = instruments.findIndex((i) => i._id === id);
+    if (instrumentIndex === -1) return;
+    instruments.splice(instrumentIndex, 1);
+  });
+
+  const categoryIds = [];
+  if (!Array.isArray(req.body.categoryIds)) {
+    categoryIds.push(req.body.categoryIds);
+  } else {
+    categoryIds.push(...req.body.categoryIds);
+  }
+  categoryIds.forEach((id) => {
+    const categoryIndex = categories.findIndex((c) => c._id === id);
+    if (categoryIndex === -1) return;
+    categories.splice(categoryIndex, 1);
+  });
+
+  res.redirect("../../");
+};
+
+export {
+  create,
+  renderCreateForm,
+  render,
+  renderUpdateForm,
+  update,
+  remove,
+  removeMultiple,
+};

@@ -1,0 +1,30 @@
+<%- include('layout',{title}) -%>
+
+<%
+const hasMultipleInstruments=categories.length>1;
+const messagePart2=hasMultipleInstruments?'You can delete all of them or update their category.':'You can delete it or update its category.';
+%>
+
+<main>
+    <p>The following instrument(s) depend(s) on the corresponding category.</p>
+    <p>
+        <%=messagePart2%>
+    </p>
+    <form method="post" action="/instrument/deleteMultiple">
+        <%for(const category of categories){%>
+        <input type="hidden" name="categoryIds" value="<%=category._id%>">
+            <fieldset>
+            <legend><%=category.name%></legend> 
+            <%for(const instrument of instrumentMap[category._id]){%>
+                <input type="hidden" name="instrumentIds" value="<%=instrument._id%>">
+                <div class="instrument">
+                    <img class="instrument-img" src="<%= instrument.imgUrl %>" alt="instrument" />
+                    <p><%=instrument.name%></p>
+                    <p><%=instrument.description%></p>
+                </div>
+            <%}%>
+            </fieldset>
+        <%}%>
+        <button>Delete<%=hasMultipleInstruments?' All':''%></button>
+    </form>
+</main>
