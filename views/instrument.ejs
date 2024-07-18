@@ -8,6 +8,8 @@
   <p><%=description%></p>
   <p><%=price%></p>
   <p><%=count%></p>
+  <p><%=category.name%></p>
+  <p><%=category.description%></p>
   <form action="<%='/instrument/'+_id+'/update'%>" method="get">
     <input type="hidden" name="_id" value="<%=_id%>" />
     <button>Update</button>

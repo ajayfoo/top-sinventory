@@ -1,4 +1,4 @@
-import { instruments } from "../test/sampleData.js";
+import { categories, instruments } from "../test/sampleData.js";
 
 const renderCreateForm = (req, res, next) => {
   res.render("create_instrument_form", {
@@ -28,9 +28,11 @@ const create = (req, res, next) => {
 
 const render = (req, res, next) => {
   const instrument = instruments.find((i) => i._id === req.params.id);
+  const category = categories.find((c) => c._id === instrument.category);
   res.render("instrument", {
     title: instrument.name,
     ...instrument,
+    category,
   });
 };
 
