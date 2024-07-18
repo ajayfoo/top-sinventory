@@ -1,4 +1,9 @@
 import { categories } from "../test/sampleData.js";
+
+const goHome = (res) => {
+  res.redirect("../../");
+};
+
 const renderCreateForm = (req, res, next) => {
   res.render("create_category_form", {
     title: "Create New Category",
@@ -13,7 +18,32 @@ const create = (req, res, next) => {
   };
 
   categories.push(newCategory);
-  res.redirect("../../");
+  goHome(res);
 };
 
-export { renderCreateForm, create };
+const renderUpdateForm = (req, res, next) => {
+  const toUpdateCategoriesId = req.query.selected_categories;
+  const toUpdateCategories = categories.filter((c) =>
+    toUpdateCategoriesId.includes(c._id)
+  );
+  const hasToUpdateMultiple = toUpdateCategories.length > 1;
+  const title = "Update " + hasToUpdateMultiple ? "Categories" : "Category";
+  res.render("update_category_form", {
+    title,
+    categories: toUpdateCategories,
+  });
+};
+
+const update = (req, res, next) => {
+  console.log(req.body);
+  const toUpdateCategoriesMap = req.body.categories;
+  categories.forEach((c) => {
+    if (!toUpdateCategoriesMap[c._id]) return;
+    const { name, description } = toUpdateCategoriesMap[c._id];
+    c.name = name;
+    c.description = description;
+  });
+  goHome(res);
+};
+
+export { renderCreateForm, create, renderUpdateForm, update };

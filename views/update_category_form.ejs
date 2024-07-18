@@ -1,0 +1,35 @@
+<%- include('layout',{title}) %>
+
+<main>
+  <form method="post" action="/category/update">
+    <%for(const category of categories){%>
+
+    <fieldset>
+      <legend><%=category.name%></legend>
+      <div class="category-update-form">
+        <p class="field">
+          <label for="<%='name_'+category.name%>">Name: </label>
+          <input
+            type="text"
+            name="<%='categories['+category._id+'][name]'%>"
+            id="<%='name_'+category.name%>"
+            value="<%=category.name%>"
+          />
+        </p>
+        <p class="field">
+          <label for="<%='description_'+category.name%>">Description: </label>
+          <textarea
+            name="<%='categories['+category._id+'][description]'%>"
+            name="category_descriptions"
+            id="<%='description_'+category.name%>"
+          >
+<%=category.description%></textarea
+          >
+        </p>
+      </div>
+    </fieldset>
+
+    <%}%>
+    <button>Update</button>
+  </form>
+</main>
