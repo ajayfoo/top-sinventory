@@ -9,6 +9,9 @@ const renderIndex = (req, res, next) => {
 };
 
 const renderFilterResults = (req, res, next) => {
+  if (!req.query.selected_categories) {
+    res.redirect("/");
+  }
   const selectedCategories = req.query.selected_categories;
   const targetInstruments = instruments.filter((i) => {
     return selectedCategories.includes(i.category);
