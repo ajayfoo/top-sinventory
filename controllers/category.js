@@ -35,7 +35,6 @@ const renderUpdateForm = (req, res, next) => {
 };
 
 const update = (req, res, next) => {
-  console.log(req.body);
   const toUpdateCategoriesMap = req.body.categories;
   categories.forEach((c) => {
     if (!toUpdateCategoriesMap[c._id]) return;
@@ -46,4 +45,12 @@ const update = (req, res, next) => {
   goHome(res);
 };
 
-export { renderCreateForm, create, renderUpdateForm, update };
+const remove = (req, res, next) => {
+  req.body.selected_categories.forEach((c) => {
+    const targetIndex = categories.findIndex((e) => e._id === c);
+    categories.splice(targetIndex, 1);
+  });
+  goHome(res);
+};
+
+export { renderCreateForm, create, renderUpdateForm, update, remove };
