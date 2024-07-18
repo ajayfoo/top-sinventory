@@ -30,4 +30,13 @@ const update = (req, res, next) => {
   res.redirect("../../");
 };
 
-export { create, render, renderUpdateForm, update };
+const remove = (req, res, next) => {
+  const targetIndex = instruments.findIndex((i) => i._id === req.body._id);
+  if (targetIndex === -1) {
+    res.redirect("../../");
+  }
+  instruments.splice(targetIndex, 1);
+  res.redirect("../../");
+};
+
+export { create, render, renderUpdateForm, update, remove };

@@ -9,6 +9,10 @@
   <p><%=price%></p>
   <p><%=count%></p>
   <form action="<%='/instrument/'+_id+'/update'%>" method="get">
+    <input type="hidden" name="_id" value="<%=_id%>" />
     <button>Update</button>
+    <button formaction="<%='/instrument/'+_id+'/delete'%>" formmethod="post">
+      Delete
+    </button>
   </form>
 </main>
