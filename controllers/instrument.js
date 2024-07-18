@@ -1,7 +1,19 @@
 import { instruments } from "../test/sampleData.js";
 
+const renderCreateForm = (req, res, next) => {
+  res.render("update_instrument_form", {
+    title: "Create Instrument",
+    name: "",
+    description: "",
+    price: "",
+    count: "",
+    _id: null,
+  });
+};
+
 const create = (req, res, next) => {
-  console.log("creating instrument");
+  console.log(req.body);
+  res.redirect("../../");
 };
 
 const render = (req, res, next) => {
@@ -39,4 +51,4 @@ const remove = (req, res, next) => {
   res.redirect("../../");
 };
 
-export { create, render, renderUpdateForm, update, remove };
+export { create, renderCreateForm, render, renderUpdateForm, update, remove };

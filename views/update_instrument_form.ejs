@@ -1,9 +1,11 @@
-<%- include('layout',{title}) %>
-
+<%- include('layout',{title}) %> <% const isCreateForm=_id===null;
+console.log(isCreateForm); const
+postUrl='/instrument/'+(isCreateForm?'create':_id+'/update'); const
+_idForForm=isCreateForm?Date.now().toString():_id; %>
 <main>
   <h1><%=title%></h1>
-  <form method="post" action="<%='/instrument/'+_id+'/update'%>">
-    <input type="hidden" name="_id" value="<%=_id%>" />
+  <form method="post" action="<%=postUrl%>">
+    <input type="hidden" name="_id" value="<%=_idForForm%>" />
     <p class="field">
       <label for="name">Name: </label>
       <input type="text" name="name" id="name" value="<%=name%>" />
@@ -20,6 +22,6 @@
       <label for="count">Count: </label>
       <input type="number" name="count" min="0" id="count" value="<%=count%>" />
     </p>
-    <button>Update</button>
+    <button><%=isCreateForm?'Create':'Update'%></button>
   </form>
 </main>

@@ -23,6 +23,9 @@
       <button formmethod="post" formaction="/category/delete">Delete</button>
     </form>
   </div>
+  <form method="get" action="/instrument/">
+    <button>Create Instrument</button>
+  </form>
   <div class="category-instruments">
     <%for(const instrument of instruments){%>
     <article class="instrument">
