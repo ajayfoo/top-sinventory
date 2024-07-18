@@ -3,7 +3,7 @@
 <main>
   <h1><%=title%></h1>
   <div class="select-category">
-    <form method="post" action="/">
+    <form method="get" action="/filter">
       <fieldset>
         <legend>Select Category</legend>
         <% for(const category of categories){ const catId='category_' +

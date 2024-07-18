@@ -9,7 +9,7 @@ const renderIndex = (req, res, next) => {
 };
 
 const renderFilterResults = (req, res, next) => {
-  const selectedCategories = req.body.selected_categories;
+  const selectedCategories = req.query.selected_categories;
   const targetInstruments = instruments.filter((i) => {
     return selectedCategories.includes(i.category);
   });
