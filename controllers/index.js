@@ -4,7 +4,7 @@ const renderIndex = (req, res, next) => {
   res.render("index", {
     categories,
     instruments,
-    title: "Sinventory",
+    title: "Instruments",
   });
 };
 
@@ -18,7 +18,7 @@ const renderFilterResults = (req, res, next) => {
   });
   console.log(targetInstruments);
   res.render("index", {
-    title: "Sinventory",
+    title: "Instruments",
     instruments: targetInstruments,
     categories,
   });

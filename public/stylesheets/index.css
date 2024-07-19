@@ -10,3 +10,42 @@
   object-position: center;
   max-height: 20rem;
 }
+
+.select-category {
+  display: grid;
+  justify-items: start;
+}
+.select-category > form {
+  border: 1px solid;
+  border-radius: var(--radius-medium);
+  padding: calc(var(--padding-medium) * 0.75) var(--padding-medium);
+}
+
+.select-category > form > fieldset {
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--margin-small);
+  padding-block-start: var(--padding-small);
+}
+.select-category .action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--margin-small);
+  margin-inline-start: var(--margin-small);
+}
+
+p.field {
+  display: flex;
+  gap: var(--margin-x-small);
+}
+
+.select-category .action-buttons > button {
+  border: none;
+  font-size: inherit;
+  padding: calc(var(--small-space) * 0.5) calc(var(--small-space) * 2);
+  margin: 0;
+  border-radius: var(--radius-small);
+}

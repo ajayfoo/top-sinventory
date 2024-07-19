@@ -1,26 +1,33 @@
 <%- include('layout',{title}); -%>
 <link rel="stylesheet" href="/stylesheets/index.css" />
 <main>
-  <h1><%=title%></h1>
+  <h2><%=title%></h2>
   <div class="select-category">
     <form method="get" action="/filter">
       <fieldset>
         <legend>Select Category</legend>
+
         <% for(const category of categories){ const catId='category_' +
         category.name %>
-        <input
+        <p class="field">
+          <input
           type="checkbox"
           value="<%=category._id%>"
           name="selected_categories"
           id="<%=catId%>"
         />
         <label for="<%=catId%>"> <%=category.name%> </label>
+          </p>
         <%}%>
+        <div class="action-buttons">
+          
+        <button>Get</button>
+        <button formmethod="get" formaction="/category/create">Create</button>
+        <button formmethod="get" formaction="/category/update">Update</button>
+        <button formmethod="post" formaction="/category/delete">Delete</button>
+        
+        </div> 
       </fieldset>
-      <button>Get</button>
-      <button formmethod="get" formaction="/category/create">Create</button>
-      <button formmethod="get" formaction="/category/update">Update</button>
-      <button formmethod="post" formaction="/category/delete">Delete</button>
     </form>
   </div>
   <form method="get" action="/instrument/">
