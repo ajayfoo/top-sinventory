@@ -50,8 +50,12 @@ p.field {
 
 .create-instrument-form {
   text-align: center;
-  margin-block: var(--margin-medium);
+  margin: var(--margin-medium) var(--margin-x-small) 0;
+  padding-block-start: var(--padding-medium);
+  background-color: var(--surface-container);
+  border-radius: var(--radius-large) var(--radius-large) 0 0;
 }
+
 .create-instrument-form > button {
   border: none;
   border-radius: 50%;
@@ -102,9 +106,11 @@ p.field {
   place-content: center;
   gap: var(--margin-small);
   padding: calc(var(--padding-medium) * 2);
+  padding-block-start: var(--padding-medium);
   margin: var(--margin-x-small);
+  margin-block-start: 0;
   background-color: var(--surface-container);
-  border-radius: var(--radius-large);
+  border-radius: 0 0 var(--radius-large) var(--radius-large);
 }
 
 .instrument {
