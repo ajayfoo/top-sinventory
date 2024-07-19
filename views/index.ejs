@@ -36,7 +36,7 @@
     </form>
   </div>
   <form class="create-instrument-form" method="get" action="/instrument/">
-    <button>Create Instrument</button>
+    <button aria-label="create new instrument">+</button>
   </form>
   <div class="category-instruments">
     <%for(const instrument of instruments){%>
@@ -48,7 +48,7 @@
           alt="instrument image"
         />
       </a>
-      <div class="instrument info">
+      <div class="instrument-info">
         <p><%=instrument.name%></p>
         <p><%=instrument.price%></p>
         <p><%=instrument.count%> in stock</p>

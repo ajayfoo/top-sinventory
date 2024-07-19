@@ -2,11 +2,12 @@
   display: grid;
   justify-items: start;
   justify-content: center;
+  margin: var(--margin-x-small);
 }
 .select-category > form {
   border-radius: var(--radius-medium);
   padding: calc(var(--padding-medium) * 0.75) var(--padding-medium);
-  background-color: var(--surface-container-high);
+  background-color: var(--surface-container-highest);
   color: var(--on-surface);
 }
 
@@ -53,26 +54,17 @@ p.field {
 }
 .create-instrument-form > button {
   border: none;
-  border-radius: var(--radius-x-small);
-  padding: calc(var(--small-space) * 0.5) calc(var(--small-space) * 2);
-  font-size: inherit;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  font-size: var(--font-size-large);
   background-color: var(--primary);
   color: var(--on-primary);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.category-instruments {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  place-items: center;
-  place-content: center;
-}
-
-.instrument-img {
-  aspect-ratio: 6/7;
-  object-fit: cover;
-  object-position: center;
-  max-height: 20rem;
-}
 .fields {
   display: flex;
   flex-wrap: wrap;
@@ -101,4 +93,32 @@ p.field {
 .field > input[type="checkbox"]:checked + label {
   background-color: var(--secondary);
   color: var(--on-secondary);
+}
+
+.category-instruments {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  place-items: center;
+  place-content: center;
+  gap: var(--margin-small);
+  padding: calc(var(--padding-medium) * 2);
+  margin: var(--margin-x-small);
+  background-color: var(--surface-container);
+  border-radius: var(--radius-large);
+}
+
+.instrument {
+  padding: var(--padding-medium);
+  background-color: var(--surface-container-high);
+  border-radius: var(--radius-small);
+}
+.instrument:hover {
+  box-shadow: 0 0 0.5rem -0.1rem var(--shadow);
+}
+
+.instrument-img {
+  aspect-ratio: 6/7;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-small);
 }

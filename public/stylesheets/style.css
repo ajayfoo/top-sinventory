@@ -14,8 +14,8 @@
   --font-size-medium: clamp(1rem, 1vw, 3rem);
   --font-size-small: clamp(0.5rem, 0.75vw, 2rem);
 
-  --radius-large: clamp(4rem, 4vw, 6rem);
-  --radius-medium: clamp(2rem, 2vw, 3rem);
+  --radius-large: clamp(1rem, 4vw, 6rem);
+  --radius-medium: clamp(1rem, 2vw, 3rem);
   --radius-small: clamp(1rem, 1vw, 2rem);
   --radius-x-small: clamp(0.5rem, 0.5vw, 1rem);
 
@@ -160,7 +160,7 @@ img {
 }
 
 body {
-  background-color: var(--background);
+  background-color: var(--surface-container-lowest);
   color: var(--on-background);
   font-size: var(--font-size-medium);
 }
@@ -193,4 +193,8 @@ h2 {
 
 button {
   box-shadow: 0 0 0.5rem 0.1rem var(--shadow);
+}
+
+button:hover {
+  cursor: pointer;
 }
