@@ -1,8 +1,12 @@
-<%- include('layout',{title}) %> <% const
+<%- include('layout',{title}) %> 
+
+<link rel="stylesheet" href="/stylesheets/create_instrument_form.css">
+
+<% const
 postUrl='/instrument/'+(isCreateForm?'create':_id+'/update'); const
 _idForForm=isCreateForm?Date.now().toString():_id; %>
 <main>
-  <h1><%=title%></h1>
+  <h2><%=title%></h2>
   <form method="post" action="<%=postUrl%>">
     <input type="hidden" name="_id" value="<%=_idForForm%>" />
     <p class="field">

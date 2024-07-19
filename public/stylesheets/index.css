@@ -1,24 +1,13 @@
-.category-instruments {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  place-items: center;
-}
-
-.instrument-img {
-  aspect-ratio: 6/7;
-  object-fit: cover;
-  object-position: center;
-  max-height: 20rem;
-}
-
 .select-category {
   display: grid;
   justify-items: start;
+  justify-content: center;
 }
 .select-category > form {
-  border: 1px solid;
   border-radius: var(--radius-medium);
   padding: calc(var(--padding-medium) * 0.75) var(--padding-medium);
+  background-color: var(--surface-container-high);
+  color: var(--on-surface);
 }
 
 .select-category > form > fieldset {
@@ -28,6 +17,12 @@
   align-items: center;
   gap: var(--margin-small);
   padding-block-start: var(--padding-small);
+  justify-content: center;
+}
+.select-category > form > fieldset > legend {
+  text-align: center;
+  font-size: calc(var(--font-size-medium) * 1.25);
+  font-weight: bold;
 }
 .select-category .action-buttons {
   display: flex;
@@ -35,6 +30,10 @@
   justify-content: flex-start;
   gap: var(--margin-small);
   margin-inline-start: var(--margin-small);
+  background-color: var(--surface-container-highest);
+  color: var(--on-surface);
+  padding: var(--padding-small);
+  border-radius: var(--radius-small);
 }
 
 p.field {
@@ -45,7 +44,36 @@ p.field {
 .select-category .action-buttons > button {
   border: none;
   font-size: inherit;
-  padding: calc(var(--small-space) * 0.5) calc(var(--small-space) * 2);
   margin: 0;
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-x-small);
+  padding: var(--padding-x-small) var(--padding-small);
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
+}
+
+.create-instrument-form {
+  text-align: center;
+  margin-block: var(--margin-medium);
+}
+.create-instrument-form > button {
+  border: none;
+  border-radius: var(--radius-x-small);
+  padding: calc(var(--small-space) * 0.5) calc(var(--small-space) * 2);
+  font-size: inherit;
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.category-instruments {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  place-items: center;
+  place-content: center;
+}
+
+.instrument-img {
+  aspect-ratio: 6/7;
+  object-fit: cover;
+  object-position: center;
+  max-height: 20rem;
 }

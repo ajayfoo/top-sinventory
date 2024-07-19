@@ -1,7 +1,6 @@
 <%- include('layout',{title}); -%>
 <link rel="stylesheet" href="/stylesheets/index.css" />
 <main>
-  <h2><%=title%></h2>
   <div class="select-category">
     <form method="get" action="/filter">
       <fieldset>
@@ -30,7 +29,7 @@
       </fieldset>
     </form>
   </div>
-  <form method="get" action="/instrument/">
+  <form class="create-instrument-form" method="get" action="/instrument/">
     <button>Create Instrument</button>
   </form>
   <div class="category-instruments">

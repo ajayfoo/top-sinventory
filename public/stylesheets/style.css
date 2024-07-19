@@ -16,7 +16,8 @@
 
   --radius-large: clamp(4rem, 4vw, 6rem);
   --radius-medium: clamp(2rem, 2vw, 3rem);
-  --radius-small: clamp(0.5rem, 0.5vw, 1rem);
+  --radius-small: clamp(1rem, 1vw, 2rem);
+  --radius-x-small: clamp(0.5rem, 0.5vw, 1rem);
 
   --margin-medium: clamp(1.5rem, 3vw, 2rem);
   --margin-small: clamp(1rem, 2vw, 1rem);
@@ -24,6 +25,7 @@
 
   --padding-medium: clamp(1rem, 2vw, 2rem);
   --padding-small: clamp(0.5rem, 1vw, 1rem);
+  --padding-x-small: clamp(0.1rem, 0.5vw, 0.5rem);
 }
 
 h1,
@@ -44,10 +46,6 @@ fieldset {
 img {
   max-inline-size: 100%;
   block-size: auto;
-}
-
-.main-nav {
-  display: flex;
 }
 
 @media screen and (prefers-color-scheme: light) {
@@ -170,4 +168,22 @@ h1 {
 
 h2 {
   font-size: var(--font-size-large);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  margin-block: var(--margin-small);
+  gap: var(--margin-medium);
+  justify-content: center;
+}
+
+.main-nav > h1 > a {
+  text-decoration: none;
+  color: var(--on-background);
+}
+
+.main-nav > h1 {
+  border: 0.3rem dashed var(--surface-tint);
+  padding: var(--padding-x-small);
 }
