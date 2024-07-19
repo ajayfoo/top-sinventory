@@ -17,6 +17,6 @@ const selectCategoryForm = document.getElementById("select-category-form");
 selectCategoryForm.addEventListener("submit", (e) => {
   if (!atLeastOneCategoryIsChecked()) {
     e.preventDefault();
-    alert("Please select at least on category");
+    alert("Please select at least one category");
   }
 });

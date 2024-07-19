@@ -41,7 +41,8 @@ h2,
 body,
 p,
 fieldset,
-input {
+input,
+button {
   padding: 0;
   margin: 0;
 }
