@@ -5,9 +5,12 @@
     <form method="get" action="/filter">
       <fieldset>
         <legend>Select Category</legend>
-
+        
+        <div class="fields">
+        
         <% for(const category of categories){ const catId='category_' +
         category.name %>
+          
         <p class="field">
           <input
           type="checkbox"
@@ -18,6 +21,9 @@
         <label for="<%=catId%>"> <%=category.name%> </label>
           </p>
         <%}%>
+          
+        </div>
+        
         <div class="action-buttons">
           
         <button>Get</button>

@@ -26,21 +26,24 @@
   --padding-medium: clamp(1rem, 2vw, 2rem);
   --padding-small: clamp(0.5rem, 1vw, 1rem);
   --padding-x-small: clamp(0.1rem, 0.5vw, 0.5rem);
-}
 
-h1,
-h2,
-body,
-p,
-fieldset {
-  padding: 0;
-  margin: 0;
+  --border-width-small: clamp(0.1rem, 0.1vw, 0.25rem);
 }
 
 *,
 *::before,
 *::after {
   box-sizing: inherit;
+}
+
+h1,
+h2,
+body,
+p,
+fieldset,
+input {
+  padding: 0;
+  margin: 0;
 }
 
 img {
@@ -186,4 +189,8 @@ h2 {
 .main-nav > h1 {
   border: 0.3rem dashed var(--surface-tint);
   padding: var(--padding-x-small);
+}
+
+button {
+  box-shadow: 0 0 0.5rem 0.1rem var(--shadow);
 }

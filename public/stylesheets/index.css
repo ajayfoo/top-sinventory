@@ -19,6 +19,7 @@
   padding-block-start: var(--padding-small);
   justify-content: center;
 }
+
 .select-category > form > fieldset > legend {
   text-align: center;
   font-size: calc(var(--font-size-medium) * 1.25);
@@ -29,11 +30,6 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: var(--margin-small);
-  margin-inline-start: var(--margin-small);
-  background-color: var(--surface-container-highest);
-  color: var(--on-surface);
-  padding: var(--padding-small);
-  border-radius: var(--radius-small);
 }
 
 p.field {
@@ -76,4 +72,33 @@ p.field {
   object-fit: cover;
   object-position: center;
   max-height: 20rem;
+}
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--margin-small);
+  justify-content: center;
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+  /* background-color: var(--surface-container-highest);
+  color: var(--on-surface); */
+  padding: var(--padding-small) var(--padding-medium);
+  border-radius: var(--radius-small);
+}
+
+.field > input[type="checkbox"] {
+  appearance: none;
+}
+.field > input[type="checkbox"] + label {
+  padding: calc(var(--padding-small) * 0.5) var(--padding-small);
+  border-radius: var(--radius-small);
+  border: var(--border-width-small) solid var(--secondary);
+}
+.field > input[type="checkbox"]:focus-visible + label {
+  outline: 0.25rem solid var(--outline);
+}
+.field > input[type="checkbox"]:checked + label {
+  background-color: var(--secondary);
+  color: var(--on-secondary);
 }
