@@ -1,8 +1,9 @@
 <%- include('layout',{title}); -%>
+<script defer src="/javascripts/index.js"></script>
 <link rel="stylesheet" href="/stylesheets/index.css" />
 <main>
   <div class="select-category">
-    <form method="get" action="/filter">
+    <form id="select-category-form" method="get" action="/filter">
       <fieldset>
         <legend>Select Category</legend>
         
