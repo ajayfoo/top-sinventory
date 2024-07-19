@@ -58,8 +58,8 @@ p.field {
   width: 1em;
   height: 1em;
   font-size: var(--font-size-large);
-  background-color: var(--primary);
-  color: var(--on-primary);
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -121,4 +121,23 @@ p.field {
   object-fit: cover;
   object-position: center;
   border-radius: var(--radius-small);
+}
+
+.instrument-info {
+  margin-block-start: var(--margin-small);
+}
+.instrument-info > p {
+  display: flex;
+  justify-content: space-between;
+}
+.instrument-info > p > span:first-child {
+  font-weight: bold;
+}
+
+.instrument-info > a {
+  text-align: center;
+}
+
+.instrument-info > a:hover {
+  text-decoration: none;
 }
