@@ -1,7 +1,9 @@
 <%- include('layout',{title}) %>
+<link rel="stylesheet" href="/stylesheets/create_category_form.css">
 <main>
-  <h1><%=title%></h1>
   <form method="post" action="/category">
+    <div class="fields">
+
     <p class="field">
       <label for="name">Name: </label>
       <input type="text" name="name" id="name" value="Brass" />
@@ -12,6 +14,8 @@
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus dolores, commodi error ducimus consequuntur ullam.</textarea
       >
     </p>
+
+    </div>
     <button>Create</button>
   </form>
 </main>
