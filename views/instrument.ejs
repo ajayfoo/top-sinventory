@@ -4,12 +4,29 @@
 
 <main>
   <img class="instrument-img" src="<%= imgUrl %>" alt="instrument" />
-  <p><%=name%></p>
-  <p><%=description%></p>
-  <p><%=price%></p>
-  <p><%=count%></p>
-  <p><%=category.name%></p>
-  <p><%=category.description%></p>
+  <div class="instrument-info">
+
+  <p class="info">
+    <span class="label">Name:</span>
+    <span class="value"><%=name%></span>
+  </p>
+  <p class="info">
+    <span class="label">Description:</span>
+    <span class="value"><%=description%></span>
+  </p>
+  <p class="info">
+    <span class="label">Count:</span>
+    <span class="value"><%=count%></span>
+  </p>
+  <p class="info">
+    <span class="label">Category Name:</span>
+    <span class="value"><%=category.name%></span>
+  </p>
+  <p class="info">
+    <span class="label">Category Description:</span>
+    <span class="value"><%=category.description%></span>
+  </p>
+  
   <form action="<%='/instrument/'+_id+'/update'%>" method="get">
     <input type="hidden" name="_id" value="<%=_id%>" />
     <button>Update</button>
@@ -17,4 +34,5 @@
       Delete
     </button>
   </form>
+  </div>
 </main>

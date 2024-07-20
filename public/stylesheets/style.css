@@ -176,6 +176,7 @@ h2 {
 
 .main-nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-block: var(--margin-small);
   gap: var(--margin-medium);

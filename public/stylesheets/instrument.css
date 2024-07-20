@@ -1,3 +1,55 @@
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  justify-items: center;
+  background-color: var(--surface-container);
+  color: var(--on-surface);
+  border-radius: var(--radius-large);
+  margin: var(--margin-x-small);
+  margin-block-start: var(--margin-medium);
+  padding: var(--padding-medium);
+}
+
 .instrument-img {
-  max-height: 25rem;
+  max-inline-size: clamp(18.75rem, 30vw, 37.5rem);
+  aspect-ratio: 6/7;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-small);
+  inline-size: 100%;
+}
+
+.instrument-info {
+  align-self: flex-start;
+  justify-self: stretch;
+  background-color: var(--surface-container-high);
+  color: var(--on-surface);
+  padding: var(--padding-medium);
+  border-radius: var(--radius-medium);
+  margin-block-start: var(--margin-small);
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-small);
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--margin-small);
+}
+.instrument-info > p > span:first-child {
+  font-weight: bold;
+}
+
+.instrument-info > form {
+  align-self: center;
+  display: flex;
+  gap: var(--margin-medium);
+}
+
+.instrument-info > form > button {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: var(--radius-x-small);
+  padding: var(--padding-small) var(--padding-medium);
 }
