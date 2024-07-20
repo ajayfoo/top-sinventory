@@ -9,7 +9,7 @@ const messagePart2=hasMultipleInstruments?'You can delete all of them or change 
 <main>
     <div class="instruction-container">
     
-        <img src="/images/info.svg" alt="info">
+        <img class="info-icon" src="/images/info.svg" alt="info">
     
     <div class="instruction">
 
@@ -29,7 +29,9 @@ const messagePart2=hasMultipleInstruments?'You can delete all of them or change 
                 <%for(const instrument of instrumentMap[category._id]){%>
                     <input type="hidden" name="instrumentIds" value="<%=instrument._id%>">
                     <div class="instrument-preview">
-                        <img class="instrument-img" src="<%= instrument.imgUrl %>" alt="instrument" />
+                        <a aria-label="instrument page" href="<%='/instrument/'+instrument._id%>">
+                            <img class="instrument-img" src="<%= instrument.imgUrl %>" alt="instrument" />
+                        </a>
                         <p><%=instrument.name%></p>
                     </div>
                 <%}%>

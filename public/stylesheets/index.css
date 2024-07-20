@@ -181,6 +181,8 @@ p.field {
 
 .instrument-info > a {
   text-align: center;
+  display: block;
+  color: var(--secondary);
 }
 
 .instrument-info > a:hover {

@@ -34,6 +34,7 @@
 *::before,
 *::after {
   box-sizing: inherit;
+  font-family: inherit;
 }
 
 h1,

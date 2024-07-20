@@ -16,14 +16,14 @@
 }
 
 @media screen and (prefers-color-scheme: light) {
-  .instruction-container > img {
+  .info-icon {
     filter: invert(13%) sepia(21%) saturate(2521%) hue-rotate(204deg)
       brightness(97%) contrast(110%);
   }
 }
 
 @media screen and (prefers-color-scheme: dark) {
-  .instruction-container > img {
+  .info-icon {
     filter: invert(92%) sepia(3%) saturate(5029%) hue-rotate(191deg)
       brightness(101%) contrast(101%);
   }
@@ -73,7 +73,10 @@ form > button {
   flex-direction: column;
   align-items: center;
 }
+.instrument-preview:hover {
+  box-shadow: 0 0 0.5rem -0.1rem var(--shadow);
+}
 
-.instrument-preview > img {
+.instrument-img {
   border-radius: var(--radius-small);
 }

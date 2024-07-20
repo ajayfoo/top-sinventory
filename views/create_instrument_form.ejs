@@ -13,15 +13,15 @@ _idForForm=isCreateForm?Date.now().toString():_id; %>
     <div class="fields">
 
     <p class="field">
-      <label for="name">Name: </label>
+      <label for="name">Name </label>
       <input type="text" name="name" id="name" value="<%=name%>" />
     </p>
     <p class="field">
-      <label for="description">Description: </label>
+      <label for="description">Description </label>
       <textarea name="description" id="description"><%=description%></textarea>
     </p>
     <p class="field">
-      <label for="category">Category: </label>
+      <label for="category">Category </label>
       <select name="category" id="category">
         <%for(const category of categories){ if(!isCreateForm &&
         category._id===currentCategoryId){ %>
@@ -33,11 +33,11 @@ _idForForm=isCreateForm?Date.now().toString():_id; %>
       </select>
     </p>
     <p class="field">
-      <label for="price">Price: </label>
+      <label for="price">Price </label>
       <input type="number" name="price" min="0" id="price" value="<%=price%>" />
     </p>
     <p class="field">
-      <label for="count">Count: </label>
+      <label for="count">Count </label>
       <input type="number" name="count" min="0" id="count" value="<%=count%>" />
     </p>
     
