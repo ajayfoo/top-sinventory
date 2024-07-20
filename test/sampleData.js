@@ -21,6 +21,16 @@ const categories = [
 
 const instruments = [
   {
+    _id: "6697b2260adf569d4494d2bb",
+    name: "Classical Guitar 2",
+    count: 21,
+    price: 8790,
+    description: "A different small O-cut classical, nylon stringed guitar.",
+    imgUrl: "/images/guitar.webp",
+    url: "",
+    category: "6697b2780adf569d4494d2bb",
+  },
+  {
     _id: "6697b2260adf569d4494d2ba",
     name: "Classical Guitar 1",
     count: 19,

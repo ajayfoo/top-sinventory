@@ -1,0 +1,79 @@
+.instruction-container {
+  margin: var(--margin-medium) var(--margin-x-small) var(--margin-small);
+  padding: var(--padding-small);
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
+  border-radius: var(--radius-medium);
+  max-width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--margin-small);
+}
+
+.instruction-container > img {
+  max-width: 2rem;
+  max-height: 2rem;
+}
+
+@media screen and (prefers-color-scheme: light) {
+  .instruction-container > img {
+    filter: invert(13%) sepia(21%) saturate(2521%) hue-rotate(204deg)
+      brightness(97%) contrast(110%);
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .instruction-container > img {
+    filter: invert(92%) sepia(3%) saturate(5029%) hue-rotate(191deg)
+      brightness(101%) contrast(101%);
+  }
+}
+
+form {
+  border-radius: var(--radius-large);
+  margin: var(--margin-x-small);
+  padding: var(--padding-medium);
+  background-color: var(--surface-container);
+  color: var(--on-surface);
+}
+
+form > fieldset {
+  padding: var(--padding-medium);
+  background-color: var(--surface-container-high);
+  border: none;
+  border-radius: var(--radius-small);
+  margin-block-end: var(--margin-small);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--margin-small);
+}
+
+form > fieldset > legend {
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+  padding: var(--padding-x-small) var(--padding-medium);
+  border-radius: var(--radius-medium);
+}
+
+form > button {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: var(--radius-x-small);
+  padding: var(--padding-small) var(--padding-medium);
+}
+
+.instrument-preview {
+  padding: var(--padding-small);
+  background-color: var(--surface-container-highest);
+  color: var(--on-surface);
+  border-radius: var(--radius-small);
+  display: flex;
+  gap: var(--margin-x-small);
+  flex-direction: column;
+  align-items: center;
+}
+
+.instrument-preview > img {
+  border-radius: var(--radius-small);
+}
