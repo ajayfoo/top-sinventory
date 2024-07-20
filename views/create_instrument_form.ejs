@@ -5,10 +5,13 @@
 <% const
 postUrl='/instrument/'+(isCreateForm?'create':_id+'/update'); const
 _idForForm=isCreateForm?Date.now().toString():_id; %>
+
 <main>
-  <h2><%=title%></h2>
   <form method="post" action="<%=postUrl%>">
     <input type="hidden" name="_id" value="<%=_idForForm%>" />
+    
+    <div class="fields">
+
     <p class="field">
       <label for="name">Name: </label>
       <input type="text" name="name" id="name" value="<%=name%>" />
@@ -37,6 +40,9 @@ _idForForm=isCreateForm?Date.now().toString():_id; %>
       <label for="count">Count: </label>
       <input type="number" name="count" min="0" id="count" value="<%=count%>" />
     </p>
+    
+    </div>
+
     <button><%=isCreateForm?'Create':'Update'%></button>
   </form>
 </main>
