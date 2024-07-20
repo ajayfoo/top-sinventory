@@ -170,6 +170,8 @@ p.field {
 
 .instrument-info {
   margin-block-start: var(--margin-small);
+  display: flex;
+  flex-direction: column;
 }
 .instrument-info > p {
   display: flex;
@@ -183,6 +185,7 @@ p.field {
   text-align: center;
   display: block;
   color: var(--secondary);
+  align-self: center;
 }
 
 .instrument-info > a:hover {
