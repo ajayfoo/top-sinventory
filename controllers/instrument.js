@@ -13,7 +13,7 @@ const renderCreateForm = (req, res, next) => {
 };
 
 const create = (req, res, next) => {
-  const { _id, name, description, price, count } = req.body;
+  const { _id, name, description, price, count, category } = req.body;
   const newInstrument = {
     _id,
     name,
@@ -22,6 +22,7 @@ const create = (req, res, next) => {
     count: parseInt(count),
     imgUrl: instruments[0].imgUrl,
     url: "",
+    category,
   };
   instruments.push(newInstrument);
   res.redirect("../../");
