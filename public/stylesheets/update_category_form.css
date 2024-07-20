@@ -1,0 +1,72 @@
+form {
+  border-radius: var(--radius-large);
+  margin: var(--margin-x-small);
+  margin-block-start: var(--margin-medium);
+  padding: var(--padding-medium);
+  background-color: var(--surface-container);
+  color: var(--on-surface);
+}
+
+form > fieldset {
+  padding: var(--padding-medium);
+  background-color: var(--surface-container-high);
+  border: none;
+  border-radius: var(--radius-small);
+  margin-block-end: var(--margin-small);
+  max-inline-size: fit-content;
+}
+
+form > fieldset > legend {
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+  padding: var(--padding-x-small) var(--padding-medium);
+  border-radius: var(--radius-medium);
+}
+
+form > button {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: var(--radius-x-small);
+  padding: var(--padding-small) var(--padding-medium);
+}
+
+.field {
+  margin-block-end: var(--margin-small);
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: var(--margin-medium);
+  align-items: center;
+}
+
+@media screen and (max-width: 425px) {
+  form > fieldset {
+    max-inline-size: unset;
+  }
+  .field {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--margin-x-small);
+  }
+}
+
+.field:last-child {
+  margin-block-end: 0;
+}
+
+.field > label {
+  font-weight: bold;
+}
+
+.field > input[type="text"],
+.field > textarea {
+  border-radius: var(--radius-x-small);
+  padding: var(--padding-x-small);
+  background-color: var(--surface-container-highest);
+  color: var(--on-surface);
+  border: 0.1rem solid var(--outline-variant);
+}
+
+.field > input[type="text"]:hover,
+.field > textarea:hover {
+  border: 0.1rem solid var(--on-surface);
+}
