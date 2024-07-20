@@ -7,22 +7,22 @@ postUrl='/instrument/'+(isCreateForm?'create':_id+'/update'); const
 _idForForm=isCreateForm?Date.now().toString():_id; %>
 
 <main>
-  <form method="post" action="<%=postUrl%>">
-    <input type="hidden" name="_id" value="<%=_idForForm%>" />
+  <form method="post" enctype="multipart/form-data" action="<%=postUrl%>">
+    <input required type="hidden" name="_id" value="<%=_idForForm%>" />
     
     <div class="fields">
 
     <p class="field">
       <label for="name">Name </label>
-      <input type="text" name="name" id="name" value="<%=name%>" />
+      <input required  type="text" name="name" id="name" value="<%=name%>" />
     </p>
     <p class="field">
       <label for="description">Description </label>
-      <textarea name="description" id="description"><%=description%></textarea>
+      <textarea required  name="description" id="description"><%=description%></textarea>
     </p>
     <p class="field">
       <label for="category">Category </label>
-      <select name="category" id="category">
+      <select required  name="category" id="category">
         <%for(const category of categories){ if(!isCreateForm &&
         category._id===currentCategoryId){ %>
 
@@ -34,13 +34,16 @@ _idForForm=isCreateForm?Date.now().toString():_id; %>
     </p>
     <p class="field">
       <label for="price">Price </label>
-      <input type="number" name="price" min="0" id="price" value="<%=price%>" />
+      <input required  type="number" name="price" min="0" id="price" value="<%=price%>" />
     </p>
     <p class="field">
       <label for="count">Count </label>
-      <input type="number" name="count" min="0" id="count" value="<%=count%>" />
+      <input required  type="number" name="count" min="0" id="count" value="<%=count%>" />
     </p>
-    
+    <p class="field">
+      <label for="image_file">Image</label>
+      <input required  type="file" accept="image/*" name="image_file" id="image_file" />
+    </p>
     </div>
 
     <button><%=isCreateForm?'Create':'Update'%></button>

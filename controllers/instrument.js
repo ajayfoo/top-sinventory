@@ -1,4 +1,5 @@
 import { categories, instruments } from "../test/sampleData.js";
+import { uploadImage } from "../utils/handleMedia.js";
 
 const renderCreateForm = (req, res, next) => {
   res.render("create_instrument_form", {
@@ -12,7 +13,8 @@ const renderCreateForm = (req, res, next) => {
   });
 };
 
-const create = (req, res, next) => {
+const create = async (req, res, next) => {
+  const imgUrl = await uploadImage(req.file.path);
   const { _id, name, description, price, count, category } = req.body;
   const newInstrument = {
     _id,
@@ -20,7 +22,7 @@ const create = (req, res, next) => {
     description,
     price: parseFloat(price),
     count: parseInt(count),
-    imgUrl: instruments[0].imgUrl,
+    imgUrl,
     url: "",
     category,
   };

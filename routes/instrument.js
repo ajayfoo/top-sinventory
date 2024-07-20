@@ -1,4 +1,5 @@
 import { Router } from "express";
+import multer from "multer";
 import {
   create,
   remove,
@@ -9,10 +10,11 @@ import {
   update,
 } from "../controllers/instrument.js";
 
+const upload = multer({ dest: "uploads/" });
 const router = Router();
 
 router.get("/", renderCreateForm);
-router.post("/create", create);
+router.post("/create", upload.single("image_file"), create);
 router.get("/:id", render);
 router.get("/:id/update", renderUpdateForm);
 router.post("/:id/update", update);
