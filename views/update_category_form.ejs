@@ -6,6 +6,12 @@
   <form method="post" action="/category/update">
     <%for(const category of categories){%>
 
+    <input type="hidden"
+          name="<%='categories['+category._id+'][_id]'%>"
+          value="<%=category._id%>">
+    <input type="hidden"
+          name="<%='categories['+category._id+'][url]'%>"
+          value="some url">
     <fieldset>
       <legend><%=category.name%></legend>
       <div class="category-update-form">

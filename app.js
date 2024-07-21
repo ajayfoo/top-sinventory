@@ -8,6 +8,12 @@ import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
 import instrumentRouter from "./routes/instrument.js";
 import categoryRouter from "./routes/category.js";
+import mongoose from "mongoose";
+import "dotenv/config";
+
+mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
+  dbName: "sinventory",
+});
 
 const app = express();
 

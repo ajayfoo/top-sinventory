@@ -1,4 +1,6 @@
 import { categories, instruments } from "../test/sampleData.js";
+import Category from "../models/category.js";
+import { Mongoose } from "mongoose";
 
 const goHome = (res) => {
   res.redirect("../../");
@@ -10,22 +12,23 @@ const renderCreateForm = (req, res, next) => {
   });
 };
 
-const create = (req, res, next) => {
-  const newCategory = {
+const create = async (req, res, next) => {
+  const newCategory = new Category({
     name: req.body.name,
     description: req.body.description,
-    _id: Date.now().toString(),
-  };
-
-  categories.push(newCategory);
+    url: "some url",
+  });
+  await newCategory.save();
   goHome(res);
 };
 
-const renderUpdateForm = (req, res, next) => {
-  const toUpdateCategoriesId = req.query.selected_categories;
-  const toUpdateCategories = categories.filter((c) =>
-    toUpdateCategoriesId.includes(c._id)
-  );
+const renderUpdateForm = async (req, res, next) => {
+  const _ids = req.query.selected_categories;
+  const toUpdateCategories = await Category.find({
+    _id: {
+      $in: _ids,
+    },
+  });
   const hasToUpdateMultiple = toUpdateCategories.length > 1;
   const title = "Update " + hasToUpdateMultiple ? "Categories" : "Category";
   res.render("update_category_form", {
@@ -34,14 +37,22 @@ const renderUpdateForm = (req, res, next) => {
   });
 };
 
-const update = (req, res, next) => {
-  const toUpdateCategoriesMap = req.body.categories;
-  categories.forEach((c) => {
-    if (!toUpdateCategoriesMap[c._id]) return;
-    const { name, description } = toUpdateCategoriesMap[c._id];
+const update = async (req, res, next) => {
+  console.log(req.body.categories);
+  const updatedCategoriesMap = req.body.categories;
+  const toUpdateCategoryIds = Object.keys(req.body.categories);
+  const toUpdateCategoryModels = await Category.find({
+    _id: {
+      $in: toUpdateCategoryIds,
+    },
+  });
+  toUpdateCategoryModels.forEach((c) => {
+    const { name, description, url } = updatedCategoriesMap[c._id];
     c.name = name;
     c.description = description;
+    c.url = url;
   });
+  await Category.bulkSave(toUpdateCategoryModels);
   goHome(res);
 };
 
