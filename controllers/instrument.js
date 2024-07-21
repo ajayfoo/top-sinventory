@@ -58,7 +58,12 @@ const renderUpdateForm = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  const imgUrl = await uploadImage(req.file.path);
+  let imgUrl = null;
+  if (req.file === undefined) {
+    imgUrl = req.body.imgUrl;
+  } else {
+    imgUrl = await uploadImage(req.file.path);
+  }
   const { name, description, price, count, category } = req.body;
   await Instrument.findByIdAndUpdate(req.body._id, {
     name,

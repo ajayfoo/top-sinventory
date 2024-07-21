@@ -47,11 +47,12 @@ _idForForm=isCreateForm?Date.now().toString():_id; %>
       <%if(isCreateForm){%>
           <input required type="file" accept="image/*" name="image_file" id="image_file" />
       <%}else{%>
+        <input type="hidden" name="imgUrl" value="<%=imgUrl%>">
         <span class="image-input">
           <input class="invisible" type="file" accept="image/*" name="image_file" id="image_file" />
           <img id="image_input_preview" src="<%=imgUrl%>" alt="<%=name%>">
           <button title="change" id="open_file_browser" type="button">
-            <img class="change-icon" src="/images/change.svg" alt="change symbol">   
+            <img class="change-icon" src="/images/change.svg" alt="change symbol">
           </button>
         </span>
       <%}%>
