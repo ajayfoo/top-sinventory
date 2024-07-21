@@ -1,6 +1,10 @@
-import { categories, instruments } from "../test/sampleData.js";
+import Category from "../models/category.js";
+import Instrument from "../models/instrument.js";
 
-const renderIndex = (req, res, next) => {
+const renderIndex = async (req, res, next) => {
+  const categories = await Category.find();
+  const instruments = await Instrument.find().populate("category");
+  console.log(instruments);
   res.render("index", {
     categories,
     instruments,
@@ -8,22 +12,24 @@ const renderIndex = (req, res, next) => {
   });
 };
 
-const renderFilterResults = (req, res, next) => {
+const renderFilterResults = async (req, res, next) => {
   if (!req.query.selected_categories) {
     res.redirect("/");
   }
   const selectedCategories = req.query.selected_categories;
-  const targetInstruments = instruments.filter((i) => {
-    return selectedCategories.includes(i.category);
-  });
-  console.log(targetInstruments);
+  const [categories, instruments] = await Promise.all([
+    Category.find(),
+    Instrument.find({
+      category: {
+        $in: selectedCategories,
+      },
+    }).populate("category"),
+  ]);
   res.render("index", {
     title: "Instruments",
-    instruments: targetInstruments,
+    instruments,
     categories,
   });
 };
-
-const renderSearchResult = (req, res, next) => {};
 
 export { renderIndex, renderFilterResults };

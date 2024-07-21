@@ -1,5 +1,7 @@
 import { categories, instruments } from "../test/sampleData.js";
 import { uploadImage } from "../utils/handleMedia.js";
+import Instrument from "../models/instrument.js";
+import Category from "../models/category.js";
 
 const renderCreateForm = (req, res, next) => {
   res.render("create_instrument_form", {
@@ -15,40 +17,43 @@ const renderCreateForm = (req, res, next) => {
 
 const create = async (req, res, next) => {
   const imgUrl = await uploadImage(req.file.path);
-  const { _id, name, description, price, count, category } = req.body;
-  const newInstrument = {
-    _id,
+  const { name, description, price, count, category } = req.body;
+  const newInstrument = new Instrument({
     name,
     description,
     price: parseFloat(price),
     count: parseInt(count),
     imgUrl,
-    url: "",
+    url: "some url",
     category,
-  };
-  instruments.push(newInstrument);
+  });
+  await newInstrument.save();
   res.redirect("../../");
 };
 
-const render = (req, res, next) => {
-  const instrument = instruments.find((i) => i._id === req.params.id);
-  const category = categories.find((c) => c._id === instrument.category);
+const render = async (req, res, next) => {
+  const instrument = await Instrument.findById(req.params.id).populate(
+    "category"
+  );
+  console.log(instrument);
   res.render("instrument", {
     title: instrument.name,
-    ...instrument,
-    category,
+    ...instrument.toObject(),
   });
 };
 
-const renderUpdateForm = (req, res, next) => {
-  const targetInstrument = instruments.find((i) => i._id === req.params.id);
-  const currentCategoryId = targetInstrument.category;
+const renderUpdateForm = async (req, res, next) => {
+  const [instrument, categories] = await Promise.all([
+    Instrument.findById(req.params.id).populate("category"),
+    Category.find(),
+  ]);
+  const currentCategoryId = instrument.category._id;
   res.render("create_instrument_form", {
-    title: "Update " + targetInstrument.name,
+    title: "Update " + instrument.name,
     isCreateForm: false,
     categories,
     currentCategoryId,
-    ...targetInstrument,
+    ...instrument.toObject(),
   });
 };
 
