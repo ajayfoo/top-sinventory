@@ -79,30 +79,37 @@ form > button {
   object-fit: cover;
   object-position: center;
 }
-.image-input > button {
+
+.image-controls {
   --image-size: clamp(3rem, 5vw, 4rem);
-  width: var(--image-size);
-  height: var(--image-size);
   position: absolute;
   top: calc(50% - var(--image-size) * 0.5);
+}
+#open_file_browser,
+#reset_image {
+  width: var(--image-size);
+  height: var(--image-size);
   border-radius: 50%;
   border: none;
   background-color: var(--secondary-container);
 }
 
-.change-icon {
+.change-icon,
+.reset-icon {
   padding: var(--padding-small);
 }
 
 @media screen and (prefers-color-scheme: light) {
-  .change-icon {
+  .change-icon,
+  .reset-icon {
     filter: invert(13%) sepia(21%) saturate(2521%) hue-rotate(204deg)
       brightness(97%) contrast(110%);
   }
 }
 
 @media screen and (prefers-color-scheme: dark) {
-  .change-icon {
+  .change-icon,
+  .reset-icon {
     filter: invert(92%) sepia(3%) saturate(5029%) hue-rotate(191deg)
       brightness(101%) contrast(101%);
   }

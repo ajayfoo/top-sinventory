@@ -1,6 +1,8 @@
 const imagePreview = document.getElementById("image_input_preview");
-const fileInput = document.getElementById("image_file");
+const imageUrlHiddenField = document.getElementById("image_url");
+const imageInput = document.getElementById("image_file");
 const openFileBrowserBtn = document.getElementById("open_file_browser");
+const resetImage = document.getElementById("reset_image");
 const fileReader = new FileReader();
 const form = document.querySelector("form");
 
@@ -13,10 +15,15 @@ fileReader.addEventListener(
 );
 
 openFileBrowserBtn.addEventListener("click", () => {
-  fileInput.click();
+  imageInput.click();
 });
 
-fileInput.addEventListener("change", () => {
-  if (!fileInput.files[0]) return;
-  fileReader.readAsDataURL(fileInput.files[0]);
+imageInput.addEventListener("change", () => {
+  if (!imageInput.files[0]) return;
+  fileReader.readAsDataURL(imageInput.files[0]);
+});
+
+resetImage.addEventListener("click", () => {
+  imageInput.value = null;
+  imagePreview.src = imageUrlHiddenField.value;
 });
