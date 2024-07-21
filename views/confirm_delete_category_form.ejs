@@ -21,7 +21,10 @@ const messagePart2=hasMultipleInstruments?'You can delete all of them or change 
     
     </div>
 
-   <form method="post" action="/instrument/deleteMultiple">
+   <form method="post" action="/category/deleteWithInstruments">
+        <%for(const categoryId of categoryIdsWithoutDependentInstruments ){%>
+            <input type="hidden" name="categoryIds" value="<%=categoryId%>">
+        <%}%>
         <%for(const category of categories){%>
             <input type="hidden" name="categoryIds" value="<%=category._id%>">
             <fieldset>

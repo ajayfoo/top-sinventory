@@ -15,6 +15,7 @@ const renderIndex = async (req, res, next) => {
 const renderFilterResults = async (req, res, next) => {
   if (!req.query.selected_categories) {
     res.redirect("/");
+    return;
   }
   const selectedCategories = req.query.selected_categories;
   const [categories, instruments] = await Promise.all([

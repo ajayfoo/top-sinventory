@@ -1,6 +1,6 @@
-import { categories, instruments } from "../test/sampleData.js";
 import Category from "../models/category.js";
-import { Mongoose } from "mongoose";
+import Instrument from "../models/instrument.js";
+import mongoose from "mongoose";
 
 const goHome = (res) => {
   res.redirect("../../");
@@ -56,43 +56,107 @@ const update = async (req, res, next) => {
   goHome(res);
 };
 
-const remove = (req, res, next) => {
-  const instrumentMap = {};
-  const selectedCategories = [];
+const remove = async (req, res, next) => {
+  const selectedCategoryIds = [];
 
   if (!Array.isArray(req.body.selected_categories)) {
-    selectedCategories.push(req.body.selected_categories);
+    selectedCategoryIds.push(req.body.selected_categories);
   } else {
-    selectedCategories.push(...req.body.selected_categories);
+    selectedCategoryIds.push(...req.body.selected_categories);
+  }
+  const categoryObjectIds = selectedCategoryIds.map((c) =>
+    mongoose.Types.ObjectId.createFromHexString(c)
+  );
+  console.log("categories:- ");
+  categoryObjectIds.forEach((c) => console.log(c.toString()));
+  const result = await Instrument.aggregate([
+    {
+      $match: {
+        category: {
+          $in: categoryObjectIds,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$category",
+        instruments: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $lookup: {
+        from: "categories",
+        localField: "_id",
+        foreignField: "_id",
+        as: "category",
+      },
+    },
+  ]).exec();
+
+  if (result.length === 0) {
+    await Category.deleteMany({ _id: { $in: selectedCategoryIds } });
+    goHome(res);
+    return;
   }
 
-  selectedCategories.forEach((c) => {
-    const dependentInstruments = instruments.filter((i) => i.category === c);
-    if (dependentInstruments.length !== 0) {
-      instrumentMap[c] = dependentInstruments;
-    } else {
-      const targetIndex = categories.findIndex((e) => e._id === c);
-      categories.splice(targetIndex, 1);
-    }
+  const categoriesWithDependentInstruments = [];
+  const instrumentMap = {};
+  result.forEach((r) => {
+    const ins = r.instruments;
+    const cat = r.category[0];
+    categoriesWithDependentInstruments.push(cat);
+    instrumentMap[cat._id.toString()] = ins;
   });
 
-  const categoryIdsWithDependentInstruments = Object.keys(instrumentMap);
-  console.log(
-    categories.filter((c) =>
-      categoryIdsWithDependentInstruments.includes(c._id)
-    )
+  const categoryIdsWithoutDependentInstruments = selectedCategoryIds.filter(
+    (c) => categoriesWithDependentInstruments.some((d) => d._id !== c)
   );
-  if (categoryIdsWithDependentInstruments.length === 0) {
-    goHome(res);
-  } else {
-    res.render("confirm_delete_category_form", {
-      title: "Confirm Deletion",
-      categories: categories.filter((c) =>
-        categoryIdsWithDependentInstruments.includes(c._id)
-      ),
-      instrumentMap,
-    });
-  }
+
+  res.render("confirm_delete_category_form", {
+    title: "Confirm Deletion",
+    categories: categoriesWithDependentInstruments,
+    categoryIdsWithoutDependentInstruments,
+    instrumentMap,
+  });
 };
 
-export { renderCreateForm, create, renderUpdateForm, update, remove };
+const removeWithInstruments = async (req, res, next) => {
+  console.log(req.body.instrumentIds);
+  console.log(req.body.categoryIds);
+  const instrumentIds = [];
+  if (!Array.isArray(req.body.instrumentIds)) {
+    instrumentIds.push(req.body.instrumentIds);
+  } else {
+    instrumentIds.push(...req.body.instrumentIds);
+  }
+
+  await Instrument.deleteMany({
+    _id: {
+      $in: instrumentIds,
+    },
+  });
+
+  const categoryIds = [];
+  if (!Array.isArray(req.body.categoryIds)) {
+    categoryIds.push(req.body.categoryIds);
+  } else {
+    categoryIds.push(...req.body.categoryIds);
+  }
+
+  await Category.deleteMany({
+    _id: {
+      $in: categoryIds,
+    },
+  });
+
+  res.redirect("../../");
+};
+
+export {
+  renderCreateForm,
+  create,
+  renderUpdateForm,
+  update,
+  remove,
+  removeWithInstruments,
+};

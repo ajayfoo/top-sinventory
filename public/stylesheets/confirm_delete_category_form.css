@@ -79,4 +79,8 @@ form > button {
 
 .instrument-img {
   border-radius: var(--radius-small);
+  aspect-ratio: 6/7;
+  object-fit: cover;
+  object-position: center;
+  inline-size: 100%;
 }
