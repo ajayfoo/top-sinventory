@@ -17,7 +17,7 @@ router.get("/", renderCreateForm);
 router.post("/create", upload.single("image_file"), create);
 router.get("/:id", render);
 router.get("/:id/update", renderUpdateForm);
-router.post("/:id/update", update);
+router.post("/:id/update", upload.single("image_file"), update);
 router.post("/:id/delete", remove);
 router.post("/deleteMultiple", removeMultiple);
 

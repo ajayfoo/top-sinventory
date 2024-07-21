@@ -52,7 +52,8 @@ form > button {
 
 .field > input,
 .field > textarea,
-.field > select {
+.field > select,
+.field > .image-input {
   border-radius: var(--radius-x-small);
   padding: var(--padding-x-small);
   background-color: var(--surface-container-highest);
@@ -64,4 +65,49 @@ form > button {
 .field > select:hover,
 .field > textarea:hover {
   border: 0.1rem solid var(--on-surface);
+}
+
+.image-input {
+  display: inline-flex;
+  justify-content: center;
+  position: relative;
+}
+.image-input > img {
+  border-radius: var(--radius-x-small);
+  width: clamp(200px, 20vw, 600px);
+  aspect-ratio: 6/7;
+  object-fit: cover;
+  object-position: center;
+}
+.image-input > button {
+  --image-size: clamp(3rem, 5vw, 4rem);
+  width: var(--image-size);
+  height: var(--image-size);
+  position: absolute;
+  top: calc(50% - var(--image-size) * 0.5);
+  border-radius: 50%;
+  border: none;
+  background-color: var(--secondary-container);
+}
+
+.change-icon {
+  padding: var(--padding-small);
+}
+
+@media screen and (prefers-color-scheme: light) {
+  .change-icon {
+    filter: invert(13%) sepia(21%) saturate(2521%) hue-rotate(204deg)
+      brightness(97%) contrast(110%);
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .change-icon {
+    filter: invert(92%) sepia(3%) saturate(5029%) hue-rotate(191deg)
+      brightness(101%) contrast(101%);
+  }
+}
+
+.invisible {
+  display: none;
 }

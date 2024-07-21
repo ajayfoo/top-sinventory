@@ -1,6 +1,7 @@
 <%- include('layout',{title}) %> 
 
 <link rel="stylesheet" href="/stylesheets/create_instrument_form.css">
+<script src="/javascripts/create_instrument_form.js" defer></script>
 
 <% const
 postUrl='/instrument/'+(isCreateForm?'create':_id+'/update'); const
@@ -40,10 +41,23 @@ _idForForm=isCreateForm?Date.now().toString():_id; %>
       <label for="count">Count </label>
       <input required  type="number" name="count" min="0" id="count" value="<%=count%>" />
     </p>
-    <p class="field">
+    <p class="field image">
+
       <label for="image_file">Image</label>
-      <input required  type="file" accept="image/*" name="image_file" id="image_file" value="<%=imgUrl%>" />
+      <%if(isCreateForm){%>
+          <input required type="file" accept="image/*" name="image_file" id="image_file" />
+      <%}else{%>
+        <span class="image-input">
+          <input class="invisible" type="file" accept="image/*" name="image_file" id="image_file" />
+          <img id="image_input_preview" src="<%=imgUrl%>" alt="<%=name%>">
+          <button title="change" id="open_file_browser" type="button">
+            <img class="change-icon" src="/images/change.svg" alt="change symbol">   
+          </button>
+        </span>
+      <%}%>
+    
     </p>
+
     </div>
 
     <button><%=isCreateForm?'Create':'Update'%></button>

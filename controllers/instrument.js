@@ -57,14 +57,18 @@ const renderUpdateForm = async (req, res, next) => {
   });
 };
 
-const update = (req, res, next) => {
-  const targetInstrument = instruments.find((i) => i._id === req.body._id);
+const update = async (req, res, next) => {
+  const imgUrl = await uploadImage(req.file.path);
   const { name, description, price, count, category } = req.body;
-  targetInstrument.name = name;
-  targetInstrument.description = description;
-  targetInstrument.price = price;
-  targetInstrument.count = count;
-  targetInstrument.category = category;
+  await Instrument.findByIdAndUpdate(req.body._id, {
+    name,
+    description,
+    price,
+    count,
+    category,
+    url: "some url",
+    imgUrl,
+  });
   res.redirect("../../");
 };
 
