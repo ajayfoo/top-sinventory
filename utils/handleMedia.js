@@ -8,6 +8,7 @@ const uploadImage = async (imagePath) => {
     use_filename: true,
     unique_filename: false,
     overwrite: true,
+    asset_folder: "Sinventory",
   };
   try {
     const result = await cloudinary.uploader.upload(imagePath, options);

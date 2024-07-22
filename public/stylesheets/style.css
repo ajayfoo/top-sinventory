@@ -197,7 +197,9 @@ h2 {
 button {
   box-shadow: 0 0 0.4rem -0.1rem var(--shadow);
 }
-
+button:active {
+  box-shadow: none;
+}
 button:hover {
   cursor: pointer;
 }

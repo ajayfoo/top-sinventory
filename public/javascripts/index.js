@@ -6,6 +6,8 @@ const categoryCheckboxes = document.querySelectorAll(
   'input[name="selected_categories"]'
 );
 
+const selectCategoryDialog = document.querySelector("dialog");
+
 const atLeastOneCategoryIsChecked = () => {
   for (const checkbox of categoryCheckboxes) {
     if (checkbox.checked) return true;
@@ -17,6 +19,6 @@ const selectCategoryForm = document.getElementById("select-category-form");
 selectCategoryForm.addEventListener("submit", (e) => {
   if (!atLeastOneCategoryIsChecked()) {
     e.preventDefault();
-    alert("Please select at least one category");
+    selectCategoryDialog.showModal();
   }
 });
