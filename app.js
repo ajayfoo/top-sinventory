@@ -30,7 +30,7 @@ app.use(express.json());
 
 app.use(
   session({
-    secret: "some secret",
+    secret: process.env.SESSION_SECRET,
     store: MongoStore.create({
       client: mongoose.connection.getClient(),
       dbName: "sinventory",

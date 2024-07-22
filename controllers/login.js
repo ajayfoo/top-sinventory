@@ -18,7 +18,7 @@ const login = async (req, res, next) => {
     req.session.authenticated = true;
     res.redirect("../");
   } else {
-    res.render("login", { message: "Login failed" });
+    res.render("login", { message: "Login failed!" });
   }
 };
 

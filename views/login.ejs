@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/login.css">
     <title>Login</title>
 </head>
 <body>
@@ -10,15 +12,15 @@
         <form action="/login" method="post">
             <p class="field">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username">
+                <input required type="text" id="username" name="username">
             </p>
             <p class="field">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password">
+                <input required type="password" id="password" name="password">
             </p>
             <button>Login</button>
             <% if(typeof message!=='undefined'){%>
-                <p><%=message%></p>
+                <p class="message"><img src="/images/error.svg" alt=""><%=message%></p>
             <%}%>
         </form>
     </main> 

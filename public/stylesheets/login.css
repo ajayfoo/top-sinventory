@@ -1,0 +1,84 @@
+main {
+  height: 100vh;
+  background-color: var(--surface);
+  display: grid;
+  place-content: center;
+}
+form {
+  display: grid;
+  place-content: center;
+  gap: var(--margin-small);
+  background-color: var(--surface-container);
+  padding: var(--padding-medium);
+  border-radius: var(--radius-medium);
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: var(--margin-medium);
+  align-items: center;
+}
+
+@media screen and (max-width: 425px) {
+  form > .fields {
+    max-inline-size: unset;
+  }
+  .field {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--margin-x-small);
+  }
+}
+
+.field > label {
+  font-weight: bold;
+}
+
+.field > input {
+  border-radius: var(--radius-x-small);
+  padding: var(--padding-x-small);
+  padding-inline-start: 1ch;
+  background-color: var(--surface-container-highest);
+  color: var(--on-surface);
+  border: 0.1rem solid var(--outline-variant);
+}
+
+.field > input:hover {
+  border: 0.1rem solid var(--on-surface);
+}
+form > button {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  justify-self: center;
+  padding: var(--padding-x-small) var(--padding-small);
+  border-radius: var(--radius-x-small);
+  border: none;
+}
+.message {
+  background-color: var(--error-container);
+  color: var(--on-error-container);
+  padding: var(--padding-small);
+  border-radius: var(--radius-x-small);
+  display: flex;
+  align-items: center;
+  gap: var(--margin-small);
+}
+
+.message > img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media screen and (prefers-color-scheme: light) {
+  .message > img {
+    filter: invert(4%) sepia(54%) saturate(7355%) hue-rotate(350deg)
+      brightness(96%) contrast(104%);
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .message > img {
+    filter: invert(98%) sepia(4%) saturate(3541%) hue-rotate(296deg)
+      brightness(100%) contrast(103%);
+  }
+}
