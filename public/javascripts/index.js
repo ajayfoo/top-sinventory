@@ -17,8 +17,7 @@ const atLeastOneCategoryIsChecked = () => {
 
 const selectCategoryForm = document.getElementById("select-category-form");
 selectCategoryForm.addEventListener("submit", (e) => {
-  if (!atLeastOneCategoryIsChecked()) {
-    e.preventDefault();
-    selectCategoryDialog.showModal();
-  }
+  if (atLeastOneCategoryIsChecked()) return;
+  e.preventDefault();
+  selectCategoryDialog.showModal();
 });
