@@ -1,15 +1,17 @@
 import createError from "http-errors";
 import express from "express";
 import { join } from "path";
-import cookieParser from "cookie-parser";
 import logger from "morgan";
+import session from "express-session";
+import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
+import "dotenv/config";
 
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
 import instrumentRouter from "./routes/instrument.js";
 import categoryRouter from "./routes/category.js";
-import mongoose from "mongoose";
-import "dotenv/config";
+import loginRouter from "./routes/login.js";
 
 mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
   dbName: "sinventory",
@@ -25,9 +27,41 @@ app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
+
+app.use(
+  session({
+    secret: "some secret",
+    store: MongoStore.create({
+      client: mongoose.connection.getClient(),
+      dbName: "sinventory",
+    }),
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      maxAge: 60000 * 100,
+    },
+  })
+);
+
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use(express.static(join(__dirname, "public")));
+app.use("/login", loginRouter);
+
+//validate user session ID
+app.use((req, res, next) => {
+  console.log("store: " + req.session.store);
+  req.sessionStore.get(req.session.id, (err, session) => {
+    console.log("error:" + err);
+    console.log("session:-");
+    console.log(session);
+    if (err) throw err;
+    if (session) {
+      next();
+      return;
+    }
+    res.redirect("/login");
+  });
+});
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
