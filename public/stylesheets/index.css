@@ -186,8 +186,17 @@ p.field {
   display: block;
   color: var(--secondary);
   align-self: center;
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+  padding: var(--padding-x-small) var(--padding-small);
+  text-decoration: none;
+  border-radius: var(--radius-small);
 }
 
 .instrument-info > a:hover {
-  text-decoration: none;
+  background-color: var(--secondary-hover);
+}
+
+.instrument-info > a:active {
+  background-color: var(--secondary-active);
 }
