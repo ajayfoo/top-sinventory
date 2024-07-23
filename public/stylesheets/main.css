@@ -65,6 +65,8 @@ img {
     --secondary-hover: rgb(106 104 129);
     --secondary-active: rgb(118 115 143);
     --secondary-container: rgb(226 224 249);
+    --secondary-container-hover: rgb(205 203 226);
+    --secondary-container-active: rgb(184 182 204);
     --on-secondary-container: rgb(26 26 44);
     --tertiary: rgb(121 83 105);
     --on-tertiary: rgb(255 255 255);
@@ -121,6 +123,8 @@ img {
     --secondary-hover: rgb(215 213 238);
     --secondary-active: rgb(231 229 255);
     --secondary-container: rgb(69 69 89);
+    --secondary-container-hover: rgb(82 82 105);
+    --secondary-container-active: rgb(90 90 116);
     --on-secondary-container: rgb(226 224 249);
     --tertiary: rgb(233 185 211);
     --on-tertiary: rgb(70 38 58);
