@@ -1,0 +1,60 @@
+.main-header {
+  display: grid;
+  place-content: center;
+  grid-template-columns: 1fr 4fr 1fr;
+  margin-block: var(--margin-small);
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--margin-medium);
+  justify-content: center;
+  grid-column-start: 2;
+}
+
+.main-nav > h1 > a {
+  text-decoration: none;
+  color: var(--on-background);
+}
+
+.main-nav > h1 {
+  border: 0.3rem dashed var(--surface-tint);
+  padding: var(--padding-x-small);
+}
+
+.logout-button {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-self: center;
+  align-self: center;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.logout-button > img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.logout-button > img {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media screen and (prefers-color-scheme: light) {
+  .logout-button > img {
+    filter: invert(5%) sepia(77%) saturate(6895%) hue-rotate(247deg)
+      brightness(58%) contrast(94%);
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .logout-button > img {
+    filter: invert(96%) sepia(36%) saturate(3930%) hue-rotate(181deg)
+      brightness(99%) contrast(105%);
+  }
+}
