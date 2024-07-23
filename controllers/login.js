@@ -22,4 +22,11 @@ const login = async (req, res, next) => {
   }
 };
 
-export { renderLoginPage, login };
+const logout = (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect("../");
+  });
+};
+
+export { renderLoginPage, login, logout };
