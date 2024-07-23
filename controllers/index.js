@@ -4,7 +4,6 @@ import Instrument from "../models/instrument.js";
 const renderIndex = async (req, res, next) => {
   const categories = await Category.find();
   const instruments = await Instrument.find().populate("category");
-  console.log(instruments);
   res.render("index", {
     categories,
     instruments,

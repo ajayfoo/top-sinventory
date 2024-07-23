@@ -49,11 +49,7 @@ app.use("/login", loginRouter);
 
 //validate user session ID
 app.use((req, res, next) => {
-  console.log("store: " + req.session.store);
   req.sessionStore.get(req.session.id, (err, session) => {
-    console.log("error:" + err);
-    console.log("session:-");
-    console.log(session);
     if (err) throw err;
     if (session) {
       next();

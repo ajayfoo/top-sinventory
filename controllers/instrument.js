@@ -35,7 +35,6 @@ const render = async (req, res, next) => {
   const instrument = await Instrument.findById(req.params.id).populate(
     "category"
   );
-  console.log(instrument);
   res.render("instrument", {
     title: instrument.name,
     ...instrument.toObject(),

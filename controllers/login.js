@@ -5,7 +5,6 @@ const renderLoginPage = (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  console.log("login()");
   const { username, password } = req.body;
   const user = await User.findOne({});
   if (!user) {
@@ -13,7 +12,6 @@ const login = async (req, res, next) => {
     return;
   }
   const isMatch = await user.comparePassword(password);
-  console.log("IsMatch? " + isMatch);
   if (isMatch) {
     req.session.authenticated = true;
     res.redirect("../");

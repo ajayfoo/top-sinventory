@@ -38,7 +38,6 @@ const renderUpdateForm = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  console.log(req.body.categories);
   const updatedCategoriesMap = req.body.categories;
   const toUpdateCategoryIds = Object.keys(req.body.categories);
   const toUpdateCategoryModels = await Category.find({
@@ -67,8 +66,6 @@ const remove = async (req, res, next) => {
   const categoryObjectIds = selectedCategoryIds.map((c) =>
     mongoose.Types.ObjectId.createFromHexString(c)
   );
-  console.log("categories:- ");
-  categoryObjectIds.forEach((c) => console.log(c.toString()));
   const result = await Instrument.aggregate([
     {
       $match: {
@@ -121,8 +118,6 @@ const remove = async (req, res, next) => {
 };
 
 const removeWithInstruments = async (req, res, next) => {
-  console.log(req.body.instrumentIds);
-  console.log(req.body.categoryIds);
   const instrumentIds = [];
   if (!Array.isArray(req.body.instrumentIds)) {
     instrumentIds.push(req.body.instrumentIds);
