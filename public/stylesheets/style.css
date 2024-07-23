@@ -245,3 +245,31 @@ button:hover {
       brightness(99%) contrast(105%);
   }
 }
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.6);
+}
+dialog {
+  border: none;
+  background-color: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+  border-radius: var(--radius-small);
+}
+dialog > p {
+  text-align: center;
+  margin-block-end: var(--margin-small);
+}
+dialog > form {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: var(--margin-small);
+}
+
+dialog > form > button {
+  background-color: var(--tertiary);
+  color: var(--on-tertiary);
+  border: none;
+  padding: var(--padding-x-small) var(--padding-small);
+  border-radius: var(--radius-x-small);
+}

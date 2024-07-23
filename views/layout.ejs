@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title%></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="/javascripts/layout.js" defer></script>
   </head>
   <body>
     <header class="main-header">
@@ -20,5 +21,12 @@
         <img src="/images/logout.svg" alt=""> 
       </button>
     </header>
+    <dialog id="confirm-logout">
+      <p>Are you sure you want to logout?</p>
+      <form method="post" action="/logout">
+        <button>Yes</button>
+        <button formmethod="dialog">No</button>
+      </form>
+    </dialog>
   </body>
 </html>

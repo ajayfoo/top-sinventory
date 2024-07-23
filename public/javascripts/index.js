@@ -6,7 +6,9 @@ const categoryCheckboxes = document.querySelectorAll(
   'input[name="selected_categories"]'
 );
 
-const selectCategoryDialog = document.querySelector("dialog");
+const selectCategoryDialog = document.getElementById(
+  "select-category-instruction"
+);
 
 const atLeastOneCategoryIsChecked = () => {
   for (const checkbox of categoryCheckboxes) {
