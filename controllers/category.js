@@ -30,7 +30,7 @@ const renderUpdateForm = async (req, res, next) => {
     },
   });
   const hasToUpdateMultiple = toUpdateCategories.length > 1;
-  const title = "Update " + hasToUpdateMultiple ? "Categories" : "Category";
+  const title = "Update " + (hasToUpdateMultiple ? "Categories" : "Category");
   res.render("update_category_form", {
     title,
     categories: toUpdateCategories,
