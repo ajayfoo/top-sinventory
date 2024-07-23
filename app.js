@@ -6,6 +6,8 @@ import session from "express-session";
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import "dotenv/config";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
@@ -19,7 +21,7 @@ mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
 
 const app = express();
 
-const __dirname = import.meta.dirname;
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // view engine setup
 app.set("views", join(__dirname, "views"));
