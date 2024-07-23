@@ -1,5 +1,51 @@
 # Sinventory
 
+## Screenshots
+
+### Desktop
+
+1. Home
+
+   ![Home](https://i.imgur.com/qTrTFau.png)
+
+2. Update Categories
+
+   ![Update Categories](https://i.imgur.com/Dc7T43y.png)
+
+3. Confirm Deletion of categories
+
+   ![Confirm Deletion of categories](https://i.imgur.com/CQDf01i.png)
+
+4. Instrument Page
+
+   ![Instrument Page](https://i.imgur.com/JFo7MhN.png)
+
+5. Update Instrument
+
+   ![Update Instrument](https://i.imgur.com/lJpRjJt.png)
+
+### Mobile
+
+1. Home
+
+   ![Home](https://i.imgur.com/poWLKzz.png)
+
+2. Update Categories
+
+   ![Update Categories](https://i.imgur.com/zcLsXka.png)
+
+3. Confirm Deletion of categories
+
+   ![Confirm Deletion of categories](https://i.imgur.com/M3Zczct.png)
+
+4. Instrument Page
+
+   ![Instrument Page](https://i.imgur.com/qyuw0nk.png)
+
+5. Update Instrument
+
+   ![Update Instrument](https://i.imgur.com/EO0cgJq.png)
+
 ## Credits
 
 ### Instrument & Category Descriptions
