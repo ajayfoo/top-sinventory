@@ -1,9 +1,13 @@
+import db from "../db.js";
 import Category from "../models/category.js";
 import Instrument from "../models/instrument.js";
 
 const renderIndex = async (req, res, next) => {
-  const categories = await Category.find();
-  const instruments = await Instrument.find().populate("category");
+  const { rows: categories } = await db.query("SELECT * FROM categories");
+  const { rows: instruments } = await db.query(
+    "SELECT * FROM instruments WHERE category_id = ANY($1::int[])",
+    [categories.map((c) => c.id)]
+  );
   res.render("index", {
     categories,
     instruments,

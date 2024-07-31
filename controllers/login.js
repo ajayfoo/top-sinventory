@@ -1,4 +1,3 @@
-import User from "../models/user.js";
 import auth from "../middlewares/auth.js";
 
 const renderLoginPage = (req, res, next) => {
@@ -20,7 +19,12 @@ const login = (req, res, next) => {
 };
 
 const logout = (req, res, next) => {
-  req.logout();
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("../");
+  });
 };
 
 export { renderLoginPage, login, logout };
