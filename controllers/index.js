@@ -25,7 +25,7 @@ const renderFilterResults = async (req, res, next) => {
   }
   const [categories, instruments] = await Promise.all([
     db.categories.getAll(),
-    db.instruments.getAllOfCategoryIds(selectedCategories),
+    db.instruments.getAllHavingCategoryIds(selectedCategories),
   ]);
   console.log(categories);
   console.log(instruments);

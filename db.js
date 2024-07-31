@@ -39,14 +39,14 @@ const db = {
       const { rows } = await dbPool.query("SELECT * FROM categories");
       return rows;
     },
-    getOfId: async (id) => {
+    getHavingId: async (id) => {
       const { rows } = await dbPool.query(
         "SELECT * FROM categories WHERE id=$1",
         [id]
       );
       return rows[0];
     },
-    getAllOfIds: async (ids) => {
+    getAllHavingIds: async (ids) => {
       const { rows } = await dbPool.query(
         "SELECT * FROM categories WHERE id=ANY($1::int[])",
         [ids]
@@ -72,7 +72,7 @@ const db = {
       );
       return getFormattedInstrumentRows(rows);
     },
-    getOfId: async (id) => {
+    getHavingId: async (id) => {
       const { rows } = await dbPool.query(
         `
         SELECT i.id, i.name, i.description, i.price, i.count, i.img_url, i.category_id,
@@ -85,7 +85,7 @@ const db = {
       );
       return getFormattedInstrumentRows([rows])[0];
     },
-    getAllOfIds: async (ids) => {
+    getAllHavingIds: async (ids) => {
       const { rows } = await dbPool.query(
         `
         SELECT i.id, i.name, i.description, i.price, i.count, i.img_url, i.category_id,
@@ -98,7 +98,7 @@ const db = {
       );
       return getFormattedInstrumentRows(rows);
     },
-    getAllOfCategoryIds: async (categoryIds) => {
+    getAllHavingCategoryIds: async (categoryIds) => {
       const { rows } = await dbPool.query(
         `
         SELECT i.id, i.name, i.description, i.price, i.count, i.img_url, i.category_id,
@@ -124,7 +124,7 @@ const db = {
     },
   },
   users: {
-    getOfId: async (id) => {
+    getHavingId: async (id) => {
       const { rows } = await dbPool.query("SELECT * FROM users WHERE id=$1", [
         id,
       ]);

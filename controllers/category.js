@@ -20,12 +20,11 @@ const create = async (req, res, next) => {
 };
 
 const renderUpdateForm = async (req, res, next) => {
-  const _ids = req.query.selected_categories;
-  const toUpdateCategories = await Category.find({
-    _id: {
-      $in: _ids,
-    },
-  });
+  let ids = req.query.selected_categories;
+  if (!Array.isArray(ids)) {
+    ids = [ids];
+  }
+  const toUpdateCategories = await db.categories.getAllHavingIds(ids);
   const hasToUpdateMultiple = toUpdateCategories.length > 1;
   const title = "Update " + (hasToUpdateMultiple ? "Categories" : "Category");
   res.render("update_category_form", {
