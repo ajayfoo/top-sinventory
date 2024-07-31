@@ -18,17 +18,16 @@ const renderCreateForm = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   const imgUrl = await uploadImage(req.file.path);
-  const { name, description, price, count, category } = req.body;
-  const newInstrument = new Instrument({
+  const { name, description, price, count, category_id } = req.body;
+  const newInstrument = {
     name,
     description,
     price: parseFloat(price),
     count: parseInt(count),
     imgUrl,
-    url: "some url",
-    category,
-  });
-  await newInstrument.save();
+    category_id,
+  };
+  await db.instruments.insert(newInstrument);
   res.redirect("../../");
 };
 

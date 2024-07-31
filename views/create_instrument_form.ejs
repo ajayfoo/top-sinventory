@@ -22,14 +22,14 @@ _idForForm=isCreateForm?Date.now().toString():_id; %>
       <textarea required  name="description" id="description"><%=description%></textarea>
     </p>
     <p class="field">
-      <label for="category">Category </label>
-      <select required  name="category" id="category">
+      <label for="category_id">Category </label>
+      <select required  name="category_id" id="category_di">
         <%for(const category of categories){ if(!isCreateForm &&
-        category._id===currentCategoryId){ %>
+        category.id===currentCategoryId){ %>
 
-        <option selected value="<%=category._id%>"><%=category.name%></option>
+        <option selected value="<%=category.id%>"><%=category.name%></option>
         <%}else{%>
-        <option value="<%=category._id%>"><%=category.name%></option>
+        <option value="<%=category.id%>"><%=category.name%></option>
         <%}%> <%}%>
       </select>
     </p>

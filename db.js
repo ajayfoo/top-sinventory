@@ -5,6 +5,34 @@ const dbPool = new pg.Pool({
   connectionString: process.env.DATABASE_CONNECTION_STRING,
 });
 
+const getFormattedInstrumentRows = (rows) =>
+  rows.map((r) => {
+    const {
+      id,
+      name,
+      description,
+      price,
+      count,
+      img_url,
+      category_id,
+      category_name,
+      category_description,
+    } = r;
+    return {
+      id,
+      name,
+      description,
+      price,
+      count,
+      imgUrl: img_url,
+      category: {
+        id: category_id,
+        name: category_name,
+        description: category_description,
+      },
+    };
+  });
+
 const db = {
   categories: {
     getAll: async () => {
@@ -42,7 +70,7 @@ const db = {
         INNER JOIN categories AS c ON c.id=i.category_id
         `
       );
-      return rows;
+      return getFormattedInstrumentRows(rows);
     },
     getOfId: async (id) => {
       const { rows } = await dbPool.query(
@@ -55,7 +83,7 @@ const db = {
         `,
         [id]
       );
-      return rows[0];
+      return getFormattedInstrumentRows([rows])[0];
     },
     getAllOfIds: async (ids) => {
       const { rows } = await dbPool.query(
@@ -68,7 +96,7 @@ const db = {
         `,
         [ids]
       );
-      return rows;
+      return getFormattedInstrumentRows(rows);
     },
     getAllOfCategoryIds: async (categoryIds) => {
       const { rows } = await dbPool.query(
@@ -81,7 +109,18 @@ const db = {
         `,
         [categoryIds]
       );
-      return rows;
+      return getFormattedInstrumentRows(rows);
+    },
+    insert: async (instrument) => {
+      const { name, description, price, count, imgUrl, category_id } =
+        instrument;
+      return await dbPool.query(
+        `
+        INSERT INTO instruments(name,description,price,count,img_url,category_id)
+        VALUES($1,$2,$3,$4,$5,$6)
+        `,
+        [name, description, price, count, imgUrl, category_id]
+      );
     },
   },
   users: {

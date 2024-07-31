@@ -15,7 +15,7 @@
         <p class="field">
           <input
           type="checkbox"
-          value="<%=category._id%>"
+          value="<%=category.id%>"
           name="selected_categories"
           id="<%=catId%>"
         />
@@ -48,7 +48,7 @@
   <div class="category-instruments">
     <%for(const instrument of instruments){%>
     <article class="instrument">
-      <a href="<%= '/instrument/'+ instrument._id %>">
+      <a href="<%= '/instrument/'+ instrument.id %>">
         <img
           class="instrument-img"
           src="<%=instrument.imgUrl%>"
@@ -68,7 +68,7 @@
          <span class="label">In Stock</span> 
          <span class="value"><%=instrument.count%></span> 
         </p>
-      <a href="<%= '/instrument/'+ instrument._id %>">Read More</a>
+      <a href="<%= '/instrument/'+ instrument.id %>">Read More</a>
       </div>
     </article>
     <%}%>
