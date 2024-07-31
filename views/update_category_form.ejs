@@ -7,11 +7,8 @@
     <%for(const category of categories){%>
 
     <input type="hidden"
-          name="<%='categories['+category._id+'][_id]'%>"
-          value="<%=category._id%>">
-    <input type="hidden"
-          name="<%='categories['+category._id+'][url]'%>"
-          value="some url">
+          name="<%='categories['+category.id+'][id]'%>"
+          value="<%=category.id%>">
     <fieldset>
       <legend><%=category.name%></legend>
       <div class="category-update-form">
@@ -19,7 +16,7 @@
           <label for="<%='name_'+category.name%>">Name</label>
           <input
             type="text"
-            name="<%='categories['+category._id+'][name]'%>"
+            name="<%='categories['+category.id+'][name]'%>"
             id="<%='name_'+category.name%>"
             value="<%=category.name%>"
           />
@@ -27,7 +24,7 @@
         <p class="field">
           <label for="<%='description_'+category.name%>">Description</label>
           <textarea
-            name="<%='categories['+category._id+'][description]'%>"
+            name="<%='categories['+category.id+'][description]'%>"
             name="category_descriptions"
             id="<%='description_'+category.name%>"
           >

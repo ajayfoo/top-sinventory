@@ -33,6 +33,30 @@ const getFormattedInstrumentRows = (rows) =>
     };
   });
 
+const getNFieldsValues = (start, n) => {
+  const end = n + start;
+  let fieldsValues = "(";
+  for (let i = start; i < end; ++i) {
+    fieldsValues += "$" + i;
+    if (i !== end - 1) {
+      fieldsValues += ",";
+    }
+  }
+  fieldsValues += ")";
+  return fieldsValues;
+};
+
+const getNValuesClauses = (n, numOfFields) => {
+  let valuesClauses = "VALUES";
+  const totalNumOfFields = n * numOfFields;
+  for (let i = 1; i <= totalNumOfFields; i += numOfFields) {
+    valuesClauses += getNFieldsValues(i, numOfFields);
+    valuesClauses += ",";
+  }
+  valuesClauses = valuesClauses.slice(0, valuesClauses.length - 1);
+  return valuesClauses;
+};
+
 const db = {
   categories: {
     getAll: async () => {
@@ -57,6 +81,30 @@ const db = {
       return dbPool.query(
         "INSERT INTO categories(name,description) VALUES($1,$2)",
         [name, description]
+      );
+    },
+    updateMultiple: async (updatedCategoriesMap) => {
+      const numOfFields = 3;
+      const numOfCategoriesToUpdate = Object.keys(updatedCategoriesMap).length;
+      const formattedValues = Object.values(updatedCategoriesMap)
+        .map((c) => {
+          const values = Object.values(c);
+          values[0] = parseInt(values[0]);
+          return values;
+        })
+        .flat(1);
+      console.log(formattedValues);
+      console.log(getNValuesClauses(numOfCategoriesToUpdate, numOfFields));
+      return dbPool.query(
+        `
+        WITH update_values(id,name,description) AS(
+        ${getNValuesClauses(numOfCategoriesToUpdate, numOfFields)}
+        )
+        UPDATE categories
+        SET name=u.name, description=u.description FROM update_values AS u
+        WHERE categories.id=u.id::int
+        `,
+        [...formattedValues]
       );
     },
   },

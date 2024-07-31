@@ -35,19 +35,8 @@ const renderUpdateForm = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const updatedCategoriesMap = req.body.categories;
-  const toUpdateCategoryIds = Object.keys(req.body.categories);
-  const toUpdateCategoryModels = await Category.find({
-    _id: {
-      $in: toUpdateCategoryIds,
-    },
-  });
-  toUpdateCategoryModels.forEach((c) => {
-    const { name, description, url } = updatedCategoriesMap[c._id];
-    c.name = name;
-    c.description = description;
-    c.url = url;
-  });
-  await Category.bulkSave(toUpdateCategoryModels);
+  console.log(updatedCategoriesMap);
+  await db.categories.updateMultiple(updatedCategoriesMap);
   goHome(res);
 };
 
