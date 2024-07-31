@@ -5,6 +5,8 @@ const router = Router();
 
 router.get("/", renderLoginPage);
 
-router.post("/", login);
+router.post("/", login, (req, res) => {
+  res.redirect("../");
+});
 
 export default router;

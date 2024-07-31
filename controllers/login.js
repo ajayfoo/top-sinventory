@@ -1,30 +1,26 @@
 import User from "../models/user.js";
+import auth from "../middlewares/auth.js";
 
 const renderLoginPage = (req, res, next) => {
   res.render("login");
 };
 
-const login = async (req, res, next) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({});
-  if (!user) {
-    res.render("login", { message: "Login failed" });
-    return;
-  }
-  const isMatch = await user.comparePassword(password);
-  if (isMatch) {
-    req.session.authenticated = true;
-    res.redirect("../");
-  } else {
-    res.render("login", { message: "Login failed!" });
-  }
+const login = (req, res, next) => {
+  const configuredMiddleware = auth.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      res.render("login", { message: "Login failed" });
+      return;
+    }
+    req.login(user, next);
+  });
+  configuredMiddleware(req, res, next);
 };
 
 const logout = (req, res, next) => {
-  req.session.destroy((err) => {
-    if (err) throw err;
-    res.redirect("../");
-  });
+  req.logout();
 };
 
 export { renderLoginPage, login, logout };
