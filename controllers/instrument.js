@@ -1,9 +1,10 @@
 import { uploadImage } from "../utils/handleMedia.js";
 import Instrument from "../models/instrument.js";
 import Category from "../models/category.js";
+import { db } from "../db.js";
 
 const renderCreateForm = async (req, res, next) => {
-  const categories = await Category.find();
+  const categories = await db.categories.getAll();
   res.render("create_instrument_form", {
     title: "Create Instrument",
     name: "",

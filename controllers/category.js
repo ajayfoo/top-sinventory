@@ -1,3 +1,4 @@
+import { db } from "../db.js";
 import Category from "../models/category.js";
 import Instrument from "../models/instrument.js";
 import mongoose from "mongoose";
@@ -13,12 +14,8 @@ const renderCreateForm = (req, res, next) => {
 };
 
 const create = async (req, res, next) => {
-  const newCategory = new Category({
-    name: req.body.name,
-    description: req.body.description,
-    url: "some url",
-  });
-  await newCategory.save();
+  const { name, description } = req.body;
+  await db.categories.insert(name, description);
   goHome(res);
 };
 

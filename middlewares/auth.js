@@ -1,24 +1,22 @@
 import passport from "passport";
 import { Strategy } from "passport-local";
-import db from "../db.js";
+import { db } from "../db.js";
 import bcrypt from "bcrypt";
 
 passport.use(
   new Strategy(async (username, password, done) => {
     try {
-      const { rows } = await db.query("SELECT * FROM users WHERE username=$1", [
-        username,
-      ]);
+      const user = await db.users.getOfUsername(username);
       const invalidCredentialMsg = "Invalid username or password";
-      if (rows.length === 0) {
+      if (!user) {
         done(null, null, { message: invalidCredentialMsg });
         return;
       }
-      const isMatch = await bcrypt.compare(password, rows[0].password);
+      const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         done(null, null, { message: invalidCredentialMsg });
       } else {
-        const { id, username } = rows[0];
+        const { id, username } = user;
         done(null, { id, username });
       }
     } catch (error) {
@@ -33,15 +31,12 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const { rows } = await db.query(
-      "SELECT (id,username) FROM users WHERE id=$1",
-      [id]
-    );
-    if (rows.length === 0) {
+    const user = await db.users.getOfId(id);
+    if (!user) {
       done(null, null);
       return;
     }
-    done(null, rows[0]);
+    done(null, { id, username: user.username });
   } catch (error) {
     done(error);
   }
