@@ -84,3 +84,16 @@ form > button {
   object-position: center;
   inline-size: 100%;
 }
+
+.final-confirmation {
+  padding-block-end: var(--padding-small);
+}
+
+.category-name {
+  display: inline-block;
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+  padding: var(--padding-x-small) var(--padding-medium);
+  border-radius: var(--radius-medium);
+  font-weight: bold;
+}

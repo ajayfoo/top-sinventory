@@ -2,11 +2,16 @@
 <link rel="stylesheet" href="/stylesheets/confirm_delete_category_form.css">
 
 <%
+const instrumentMapEntries=Object.entries(instrumentMap);
+const hasDependentInstruments=instrumentMapEntries.length>0;
+const hasMultipleCategories=categories.length>1;
 const hasMultipleInstruments=categories.length>1;
 const messagePart2=hasMultipleInstruments?'You can delete all of them or change their category.':'You can delete it or update its category.';
 %>
 
 <main>
+    <%if(hasDependentInstruments){%>
+
     <div class="instruction-container">
         <img class="info-icon" src="/images/info.svg" alt="info">
         <div class="instruction">
@@ -15,9 +20,11 @@ const messagePart2=hasMultipleInstruments?'You can delete all of them or change 
         </div>
     </div>
 
+    <%}%>
+
    <form method="post" action="/category/deleteWithInstruments">
         <input type="hidden" name="categoryIds" value="<%=categoryIds%>">
-        <%for(const [categoryName,instruments] of Object.entries(instrumentMap)){%>
+        <%for(const [categoryName,instruments] of instrumentMapEntries){%>
             <fieldset>
                 <legend><%=categoryName%></legend> 
                 <%for(const instrument of instruments){%>
@@ -31,11 +38,11 @@ const messagePart2=hasMultipleInstruments?'You can delete all of them or change 
                 <%}%>
             </fieldset>
         <%}%>
-        <p>Are you sure you want to delete the categories
+        <p class="final-confirmation">Are you sure you want to delete the following <%=hasMultipleCategories?'categories':'category'%>?
             <%for(const category of categories){%>
-                <span><%=category.name%></span>
+                <span class="category-name"><%=category.name%></span>
             <%}%>
         </p>
-        <button>Delete<%=hasMultipleInstruments?' All':''%></button>
+        <button>Delete<%=hasMultipleCategories?' All':''%></button>
     </form>
 </main>
