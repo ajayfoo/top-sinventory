@@ -70,7 +70,7 @@ const db = {
       );
       return rows[0];
     },
-    getAllHavingIds: async (ids) => {
+    getHavingIds: async (ids) => {
       const { rows } = await dbPool.query(
         "SELECT * FROM categories WHERE id=ANY($1::int[])",
         [ids]
@@ -107,6 +107,11 @@ const db = {
         [...formattedValues]
       );
     },
+    removeHavingIds: (ids) => {
+      return dbPool.query("DELETE FROM categories WHERE id=ANY($1::int[])", [
+        ids,
+      ]);
+    },
   },
   instruments: {
     getAll: async () => {
@@ -133,7 +138,7 @@ const db = {
       );
       return getFormattedInstrumentRows([rows])[0];
     },
-    getAllHavingIds: async (ids) => {
+    getHavingIds: async (ids) => {
       const { rows } = await dbPool.query(
         `
         SELECT i.id, i.name, i.description, i.price, i.count, i.img_url, i.category_id,
@@ -146,7 +151,7 @@ const db = {
       );
       return getFormattedInstrumentRows(rows);
     },
-    getAllHavingCategoryIds: async (categoryIds) => {
+    getHavingCategoryIds: async (categoryIds) => {
       const { rows } = await dbPool.query(
         `
         SELECT i.id, i.name, i.description, i.price, i.count, i.img_url, i.category_id,

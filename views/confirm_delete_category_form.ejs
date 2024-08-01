@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/stylesheets/confirm_delete_category_form.css">
 
 <%
-const hasMultipleInstruments=categories.length>1;
+const hasMultipleInstruments=categoryIds.length>1;
 const messagePart2=hasMultipleInstruments?'You can delete all of them or change their category.':'You can delete it or update its category.';
 %>
 
@@ -22,18 +22,15 @@ const messagePart2=hasMultipleInstruments?'You can delete all of them or change 
     </div>
 
    <form method="post" action="/category/deleteWithInstruments">
-        <%for(const categoryId of categoryIdsWithoutDependentInstruments ){%>
-            <input type="hidden" name="categoryIds" value="<%=categoryId%>">
-        <%}%>
-        <%for(const category of categories){%>
-            <input type="hidden" name="categoryIds" value="<%=category._id%>">
+        <input type="hidden" name="categoryIds" value="<%=categoryIds%>">
+        <%for(const [categoryName,instruments] of Object.entries(instrumentMap)){%>
             <fieldset>
-                <legend><%=category.name%></legend> 
-                <%for(const instrument of instrumentMap[category._id]){%>
-                    <input type="hidden" name="instrumentIds" value="<%=instrument._id%>">
+                <legend><%=categoryName%></legend> 
+                <%for(const instrument of instruments){%>
+                    <input type="hidden" name="instrumentIds" value="<%=instrument.id%>">
                     <div class="instrument-preview">
-                        <a aria-label="instrument page" href="<%='/instrument/'+instrument._id%>">
-                            <img class="instrument-img" src="<%= instrument.imgUrl %>" alt="instrument" />
+                        <a aria-label="instrument page" href="<%='/instrument/'+instrument.id%>">
+                            <img class="instrument-img" src="<%= instrument.img_url %>" alt="instrument" />
                         </a>
                         <p><%=instrument.name%></p>
                     </div>
