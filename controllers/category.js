@@ -32,7 +32,6 @@ const renderUpdateForm = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const updatedCategoriesMap = req.body.categories;
-  console.log(updatedCategoriesMap);
   await db.categories.updateMultiple(updatedCategoriesMap);
   goHome(res);
 };

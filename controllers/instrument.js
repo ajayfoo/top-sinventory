@@ -1,5 +1,4 @@
 import { uploadImage } from "../utils/handleMedia.js";
-import Instrument from "../models/instrument.js";
 import { db, dbPool } from "../db.js";
 
 const renderCreateForm = async (req, res, next) => {
@@ -32,7 +31,6 @@ const create = async (req, res, next) => {
 
 const render = async (req, res, next) => {
   const instrument = await db.instruments.getHavingId(req.params.id);
-  console.log(instrument);
   res.render("instrument", {
     title: instrument.name,
     ...instrument,

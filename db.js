@@ -93,8 +93,6 @@ const db = {
           return values;
         })
         .flat(1);
-      console.log(formattedValues);
-      console.log(getNValuesClauses(numOfCategoriesToUpdate, numOfFields));
       return dbPool.query(
         `
         WITH update_values(id,name,description) AS(

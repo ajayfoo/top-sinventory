@@ -5,8 +5,6 @@ const renderIndex = async (req, res, next) => {
     db.categories.getAll(),
     db.instruments.getAll(),
   ]);
-  console.log(categories);
-  console.log(instruments);
   res.render("index", {
     categories,
     instruments,
@@ -27,8 +25,6 @@ const renderFilterResults = async (req, res, next) => {
     db.categories.getAll(),
     db.instruments.getHavingCategoryIds(selectedCategories),
   ]);
-  console.log(categories);
-  console.log(instruments);
   res.render("index", {
     title: "Instruments",
     instruments,
