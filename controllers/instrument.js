@@ -1,6 +1,5 @@
 import { uploadImage } from "../utils/handleMedia.js";
 import Instrument from "../models/instrument.js";
-import Category from "../models/category.js";
 import { db } from "../db.js";
 
 const renderCreateForm = async (req, res, next) => {
@@ -42,16 +41,16 @@ const render = async (req, res, next) => {
 
 const renderUpdateForm = async (req, res, next) => {
   const [instrument, categories] = await Promise.all([
-    Instrument.findById(req.params.id).populate("category"),
-    Category.find(),
+    db.instruments.getHavingId(req.params.id),
+    db.categories.getAll(),
   ]);
-  const currentCategoryId = instrument.category._id;
+  const currentCategoryId = instrument.category.id;
   res.render("create_instrument_form", {
     title: "Update " + instrument.name,
     isCreateForm: false,
     categories,
     currentCategoryId,
-    ...instrument.toObject(),
+    ...instrument,
   });
 };
 

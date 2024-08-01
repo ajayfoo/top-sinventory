@@ -4,12 +4,12 @@
 <script src="/javascripts/create_instrument_form.js" defer></script>
 
 <% const
-postUrl='/instrument/'+(isCreateForm?'create':_id+'/update'); const
-_idForForm=isCreateForm?Date.now().toString():_id; %>
+postUrl='/instrument/'+(isCreateForm?'create':id+'/update'); const
+idForForm=isCreateForm?Date.now().toString():id; %>
 
 <main>
   <form method="post" enctype="multipart/form-data" action="<%=postUrl%>">
-    <input required type="hidden" name="_id" value="<%=_idForForm%>" />
+    <input required type="hidden" name="id" value="<%=idForForm%>" />
     
     <div class="fields">
 
@@ -23,7 +23,7 @@ _idForForm=isCreateForm?Date.now().toString():_id; %>
     </p>
     <p class="field">
       <label for="category_id">Category </label>
-      <select required  name="category_id" id="category_di">
+      <select required  name="category_id" id="category_id">
         <%for(const category of categories){ if(!isCreateForm &&
         category.id===currentCategoryId){ %>
 
