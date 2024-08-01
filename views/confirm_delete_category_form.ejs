@@ -2,23 +2,17 @@
 <link rel="stylesheet" href="/stylesheets/confirm_delete_category_form.css">
 
 <%
-const hasMultipleInstruments=categoryIds.length>1;
+const hasMultipleInstruments=categories.length>1;
 const messagePart2=hasMultipleInstruments?'You can delete all of them or change their category.':'You can delete it or update its category.';
 %>
 
 <main>
     <div class="instruction-container">
-    
         <img class="info-icon" src="/images/info.svg" alt="info">
-    
-    <div class="instruction">
-
-    <p>The following instrument(s) depend(s) on the corresponding category.</p>
-    <p>
-        <%=messagePart2%>
-    </p>
-    </div>
-    
+        <div class="instruction">
+            <p>The following instrument(s) depend(s) on the corresponding category.</p>
+            <p><%=messagePart2%></p>
+        </div>
     </div>
 
    <form method="post" action="/category/deleteWithInstruments">
@@ -37,6 +31,11 @@ const messagePart2=hasMultipleInstruments?'You can delete all of them or change 
                 <%}%>
             </fieldset>
         <%}%>
+        <p>Are you sure you want to delete the categories
+            <%for(const category of categories){%>
+                <span><%=category.name%></span>
+            <%}%>
+        </p>
         <button>Delete<%=hasMultipleInstruments?' All':''%></button>
     </form>
 </main>

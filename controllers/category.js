@@ -1,7 +1,6 @@
 import { db, dbPool } from "../db.js";
 import Category from "../models/category.js";
 import Instrument from "../models/instrument.js";
-import mongoose from "mongoose";
 
 const goHome = (res) => {
   res.redirect("../../");
@@ -40,70 +39,51 @@ const update = async (req, res, next) => {
   goHome(res);
 };
 
-const remove = async (req, res, next) => {
-  const selectedCategoryIds = [];
-
-  if (!Array.isArray(req.body.selected_categories)) {
-    selectedCategoryIds.push(req.body.selected_categories);
-  } else {
-    selectedCategoryIds.push(...req.body.selected_categories);
+const renderConfirmDeletePage = async (req, res, next) => {
+  let selectedCategoryIds = req.query.selected_categories;
+  if (!Array.isArray(selectedCategoryIds)) {
+    selectedCategoryIds = [selectedCategoryIds];
   }
   const {
-    rows: [{ result: instrumentMap }],
+    rows: [
+      {
+        selected_categories: selectedCategories,
+        instrument_map: instrumentMap,
+      },
+    ],
   } = await dbPool.query(
     `
-    SELECT json_object_agg(r.name,r.instruments) As result
-    FROM(
-      SELECT c.name,json_agg(i.*) AS instruments FROM instruments AS i
+    SELECT jsonb_object_agg(cat.id,cat.categories) as selected_categories, jsonb_object_agg(im.name,im.instruments) AS instrument_map
+    FROM
+    (
+      SELECT c.id, jsonb_agg(c.*) AS categories FROM categories AS c WHERE id=ANY($1::int[])
+      GROUP BY c.id
+    ) AS cat, 
+    (
+      SELECT c.name,jsonb_agg(i.*) AS instruments FROM instruments AS i
       INNER JOIN categories AS c ON c.id=i.category_id AND c.id=ANY($1::int[])
-      GROUP by c.name 
+      GROUP BY c.name 
       )
-    AS r;
+    AS im
     `,
     [selectedCategoryIds]
   );
-  console.log("Results:-");
-  console.log(instrumentMap);
-  if (!instrumentMap) {
-    await db.categories.removeHavingIds(selectedCategoryIds);
-    goHome(res);
-    return;
-  }
+
+  const formattedSelectedCategories = selectedCategories
+    ? Object.values(selectedCategories).map((v) => v[0])
+    : await db.categories.getHavingIds(selectedCategoryIds);
 
   res.render("confirm_delete_category_form", {
     title: "Confirm Deletion",
     categoryIds: JSON.stringify(selectedCategoryIds),
-    instrumentMap,
+    instrumentMap: instrumentMap ?? {},
+    categories: formattedSelectedCategories,
   });
 };
 
-const removeWithInstruments = async (req, res, next) => {
-  const instrumentIds = [];
-  if (!Array.isArray(req.body.instrumentIds)) {
-    instrumentIds.push(req.body.instrumentIds);
-  } else {
-    instrumentIds.push(...req.body.instrumentIds);
-  }
-
-  await Instrument.deleteMany({
-    _id: {
-      $in: instrumentIds,
-    },
-  });
-
-  const categoryIds = [];
-  if (!Array.isArray(req.body.categoryIds)) {
-    categoryIds.push(req.body.categoryIds);
-  } else {
-    categoryIds.push(...req.body.categoryIds);
-  }
-
-  await Category.deleteMany({
-    _id: {
-      $in: categoryIds,
-    },
-  });
-
+const remove = async (req, res, next) => {
+  const categoryIds = JSON.parse(req.body.categoryIds);
+  await db.categories.removeHavingIds(categoryIds);
   res.redirect("../../");
 };
 
@@ -112,6 +92,6 @@ export {
   create,
   renderUpdateForm,
   update,
+  renderConfirmDeletePage,
   remove,
-  removeWithInstruments,
 };
