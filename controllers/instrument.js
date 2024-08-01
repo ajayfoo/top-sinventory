@@ -1,6 +1,6 @@
 import { uploadImage } from "../utils/handleMedia.js";
 import Instrument from "../models/instrument.js";
-import { db } from "../db.js";
+import { db, dbPool } from "../db.js";
 
 const renderCreateForm = async (req, res, next) => {
   const categories = await db.categories.getAll();
@@ -61,21 +61,27 @@ const update = async (req, res, next) => {
   } else {
     imgUrl = await uploadImage(req.file.path);
   }
-  const { name, description, price, count, category } = req.body;
-  await Instrument.findByIdAndUpdate(req.body._id, {
+  const {
+    id,
     name,
     description,
     price,
     count,
-    category,
-    url: "some url",
-    imgUrl,
-  });
+    category_id: categoryId,
+  } = req.body;
+  await dbPool.query(
+    `
+    UPDATE instruments
+    SET name=$1, description=$2, price=$3, count=$4, category_id=$5, img_url=$6
+    WHERE id=$7
+    `,
+    [name, description, price, count, categoryId, imgUrl, id]
+  );
   res.redirect("../../");
 };
 
 const remove = async (req, res, next) => {
-  await Instrument.findByIdAndDelete(req.body._id);
+  await db.instruments.removeHavingId(req.body.id);
   res.redirect("../../");
 };
 

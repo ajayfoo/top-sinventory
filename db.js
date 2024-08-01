@@ -175,6 +175,9 @@ const db = {
         [name, description, price, count, imgUrl, category_id]
       );
     },
+    removeHavingId: (id) => {
+      return dbPool.query("DELETE FROM instruments WHERE id=$1::int", [id]);
+    },
   },
   users: {
     getHavingId: async (id) => {
