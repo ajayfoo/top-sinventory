@@ -1,6 +1,4 @@
 import { db, dbPool } from "../db.js";
-import Category from "../models/category.js";
-import Instrument from "../models/instrument.js";
 
 const goHome = (res) => {
   res.redirect("../../");

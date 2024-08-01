@@ -132,11 +132,11 @@ const db = {
           c.name AS category_name, c.description AS category_description
         FROM instruments AS i
         INNER JOIN categories AS c ON c.id=i.category_id
-        WHERE id=$1
+        WHERE i.id=$1::int
         `,
         [id]
       );
-      return getFormattedInstrumentRows([rows])[0];
+      return getFormattedInstrumentRows(rows)[0];
     },
     getHavingIds: async (ids) => {
       const { rows } = await dbPool.query(

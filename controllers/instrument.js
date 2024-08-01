@@ -32,12 +32,11 @@ const create = async (req, res, next) => {
 };
 
 const render = async (req, res, next) => {
-  const instrument = await Instrument.findById(req.params.id).populate(
-    "category"
-  );
+  const instrument = await db.instruments.getHavingId(req.params.id);
+  console.log(instrument);
   res.render("instrument", {
     title: instrument.name,
-    ...instrument.toObject(),
+    ...instrument,
   });
 };
 

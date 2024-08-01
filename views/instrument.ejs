@@ -27,10 +27,10 @@
     <span class="value"><%=category.description%></span>
   </p>
   
-  <form action="<%='/instrument/'+_id+'/update'%>" method="get">
-    <input type="hidden" name="_id" value="<%=_id%>" />
+  <form action="<%='/instrument/'+id+'/update'%>" method="get">
+    <input type="hidden" name="id" value="<%=id%>" />
     <button>Update</button>
-    <button formaction="<%='/instrument/'+_id+'/delete'%>" formmethod="post">
+    <button formaction="<%='/instrument/'+id+'/delete'%>" formmethod="post">
       Delete
     </button>
   </form>
