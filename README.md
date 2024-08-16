@@ -1,4 +1,5 @@
 # Sinventory
+An inventory management website where authorized users can filter and view musical instruments based on their type(string, brass, wind, etc.) and modify their info(count, picture, name, type). I did this project as part of my full-stack web developer course called "The Odin Project". The course gave a general overview of how the website should work; I implemented all the required features and some more, like image upload.
 
 ## Screenshots
 
