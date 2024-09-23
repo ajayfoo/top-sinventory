@@ -1,0 +1,3 @@
+SESSION_SECRET="<strong passphrase>"
+DATABASE_CONNECTION_STRING="postgresql://<username>:<password>@<hostname>/<database name>"
+CLOUDINARY_URL="<CLOUDINARY URL retrieved from Cloudinary Console > Programmable Media > Getting Started > View API Keys>"
